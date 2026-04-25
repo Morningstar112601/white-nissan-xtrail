@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — JERICHO FALSARIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="page-contact">
+  <header class="site-header">
+    <a class="brand" href="index.html"><svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect rx="4" width="24" height="24" fill="currentColor" /><text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text></svg><span class="brand-text">JERICHO FALSARIO</span></a>
+    <input class="nav-toggle" id="nav-toggle-5" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle-5" aria-hidden="true"><span></span></label>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="resume.html" class="nav-link">Resume</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+  </header>
+
+  <main class="contact-main">
+    <section class="contact-card">
+      <h1>Let’s build something great.</h1>
+      <p class="muted">Open to full-time roles, contract work, and collaboration.</p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Contact</h3>
+          <p><strong>Email</strong><br><a href="mailto:you@example.com">you@example.com</a></p>
+          <p><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">linkedin.com/in/yourusername</a></p>
+          <p><strong>GitHub</strong><br><a href="https://github.com/yourusername" target="_blank" rel="noreferrer">github.com/yourusername</a></p>
+          <div class="muted">Prefer to keep some details private? Please include a short project description when you reach out.</div>
+        </div>
+
+        <div class="contact-form">
+          <!-- Uses mailto — causes email client to open on submit. Keep since no JS/backend. -->
+          <form action="mailto:you@example.com" method="post" enctype="text/plain">
+            <label for="name">Name</label>
+            <input id="name" name="Name" placeholder="JERICHO FALSARIO" required>
+            <label for="email">Email</label>
+            <input id="email" name="Email" placeholder="you@example.com" type="email" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="Message" rows="6" placeholder="Short message & availability" required></textarea>
+            <button class="btn btn-primary" type="submit">Send Email</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner"><div><strong>JERICHO FALSARIO</strong><div class="muted">Full-stack & Cloud Engineer</div></div>
+    <div class="footer-links"><a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:you@example.com">you@example.com</a></div></div>
+    <div class="copyright">© <span id="year-5"></span> JERICHO FALSARIO — Built with HTML & CSS</div>
+  </footer>
+
+<script>document.getElementById('year-5').textContent = new Date().getFullYear();</script>
+</body>
+</html>

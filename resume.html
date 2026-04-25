@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resume — JERICHO FALSARIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="page-resume">
+  <header class="site-header">
+    <a class="brand" href="index.html"><svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect rx="4" width="24" height="24" fill="currentColor" /><text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text></svg><span class="brand-text">JERICHO FALSARIO</span></a>
+    <input class="nav-toggle" id="nav-toggle-4" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle-4" aria-hidden="true"><span></span></label>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="resume.html" class="nav-link active">Resume</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="resume-main">
+    <div class="resume-header">
+      <div>
+        <h1>JERICHO FALSARIO</h1>
+        <p class="muted">Full-stack & Cloud Engineer — Cloud Architecture · DevOps · Security</p>
+      </div>
+      <div class="resume-actions">
+        <a class="btn btn-outline" href="assets/images/resume.pdf" download>Download PDF</a>
+        <a class="btn btn-primary" href="contact.html">Contact</a>
+      </div>
+    </div>
+
+    <section class="resume-columns">
+      <div class="col-left">
+        <h3>Experience</h3>
+        <div class="resume-item">
+          <h4>Senior Cloud Engineer — Acme Corp</h4>
+          <time>2021 — Present</time>
+          <ul>
+            <li>Designed multi-tenant telemetry platform and implemented autoscaling ingestion pipelines.</li>
+            <li>Implemented cost controls and optimized workloads to save $250k/year.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <h4>Software Engineer — Startup Labs</h4>
+          <time>2018 — 2021</time>
+          <ul>
+            <li>Built backend services and CI/CD pipelines; delivered several high-impact releases.</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside class="col-right">
+        <h3>Education</h3>
+        <div class="resume-item">
+          <h4>B.S., Computer Science</h4>
+          <time>State University • 2014 — 2018</time>
+        </div>
+
+        <h3>Certifications</h3>
+        <ul class="cert-list">
+          <li>Google Cloud Professional Cloud Architect</li>
+          <li>Certified Kubernetes Administrator (CKA)</li>
+          <li>CompTIA Security+</li>
+        </ul>
+
+        <h3>Skills</h3>
+        <div class="skill-list">
+          <span>GCP</span><span>AWS</span><span>Terraform</span><span>Kubernetes</span><span>Go</span><span>Node.js</span><span>Prometheus</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner"><div><strong>JERICHO FALSARIO</strong><div class="muted">Full-stack & Cloud Engineer</div></div>
+    <div class="footer-links"><a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:you@example.com">you@example.com</a></div></div>
+    <div class="copyright">© <span id="year-4"></span> JERICHO FALSARIO — Built with HTML & CSS</div>
+  </footer>
+
+<script>document.getElementById('year-4').textContent = new Date().getFullYear();</script>
+</body>
+</html>

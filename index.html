@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JERICHO FALSARIO — I.T. Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="page-home">
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <!-- Simple SVG logo -->
+      <svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+        <rect rx="4" width="24" height="24" fill="currentColor" />
+        <text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text>
+      </svg>
+      <span class="brand-text">JERICHO FALSARIO</span>
+    </a>
+
+    <!-- CSS hamburger (checkbox hack) -->
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle" aria-hidden="true">
+      <span></span>
+    </label>
+
+    <nav class="nav">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="resume.html" class="nav-link">Resume</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <h1 class="hero-title">I build secure, scalable systems & seamless user experiences.</h1>
+        <p class="hero-sub">Full-stack engineer | Cloud & DevOps | Cybersecurity fundamentals — I turn complex problems into reliable products.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="projects.html">View Projects</a>
+          <a class="btn btn-outline" href="resume.html">Download Resume</a>
+        </div>
+
+        <!-- Key achievements badges -->
+        <div class="badges">
+          <span class="badge">5+ Years Experience</span>
+          <span class="badge">Google Cloud Certified</span>
+          <span class="badge">Top 10% Hackathon Winner</span>
+        </div>
+      </div>
+
+      <!-- Hero illustration (simple) -->
+      <div class="hero-art">
+        <svg viewBox="0 0 600 400" class="art-svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#7b61ff"/>
+              <stop offset="100%" stop-color="#00d4ff"/>
+            </linearGradient>
+          </defs>
+          <rect rx="20" width="600" height="400" fill="url(#g)" opacity="0.12"></rect>
+          <g transform="translate(40,40)">
+            <rect x="0" y="0" width="220" height="140" rx="12" fill="#fff" opacity="0.9"></rect>
+            <rect x="240" y="10" width="300" height="180" rx="12" fill="#fff" opacity="0.9"></rect>
+            <!-- animated dots -->
+            <circle class="dot" cx="520" cy="30" r="6" fill="#7b61ff"></circle>
+            <circle class="dot dot-2" cx="500" cy="60" r="6" fill="#00d4ff"></circle>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills">
+      <h2 class="section-title">Key Skills</h2>
+      <div class="skills-grid">
+        <div class="skill">
+          <div class="skill-header">
+            <span>Cloud Architecture (GCP / AWS)</span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="--value:90%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-header">
+            <span>DevOps & CI/CD</span><span class="skill-percent">85%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="--value:85%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-header">
+            <span>Back-end (Node, Go)</span><span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="--value:80%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-header">
+            <span>Security & Hardening</span><span class="skill-percent">78%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="--value:78%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured projects preview -->
+    <section class="featured">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-preview">
+        <article class="card project-card">
+          <div class="card-front">
+            <h3>Real-time Monitoring Platform</h3>
+            <p>Scalable telemetry pipeline with Prometheus & Pub/Sub, alerting & dashboards.</p>
+            <div class="tags"><span>GCP</span><span>Prometheus</span><span>Grafana</span></div>
+          </div>
+          <div class="card-back">
+            <p>Implemented ingestion autoscaling and cut mean time to detection by 60%.</p>
+            <a class="btn btn-sm" href="projects.html#project-1">Read more</a>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <div class="card-front">
+            <h3>Secure File Transfer Service</h3>
+            <p>End-to-end encrypted transfer with audit logs & RBAC for enterprise clients.</p>
+            <div class="tags"><span>Security</span><span>Go</span><span>OAuth2</span></div>
+          </div>
+          <div class="card-back">
+            <p>Designed HSM-based key rotation and compliance logging to meet SOC2 requirements.</p>
+            <a class="btn btn-sm" href="projects.html#project-2">Read more</a>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <div class="card-front">
+            <h3>Automation Toolkit</h3>
+            <p>CLI and IaC templates for rapid environment provisioning and CI/CD pipelines.</p>
+            <div class="tags"><span>Terraform</span><span>CI</span><span>Automation</span></div>
+          </div>
+          <div class="card-back">
+            <p>Reduced provisioning times from days to minutes while enforcing security baselines.</p>
+            <a class="btn btn-sm" href="projects.html#project-3">Read more</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>JERICHO FALSARIO</strong>
+        <div class="muted">Full-stack & Cloud Engineer</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:you@example.com">you@example.com</a>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> JERICHO FALSARIO — Built with HTML & CSS</div>
+  </footer>
+
+<script>
+  // only small enhancement: set year. This is not necessary — you can remove to keep strictly HTML/CSS.
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

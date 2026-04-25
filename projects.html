@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projects — JERICHO FALSARIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="page-projects">
+  <header class="site-header">
+    <a class="brand" href="index.html"><svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect rx="4" width="24" height="24" fill="currentColor" /><text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text></svg><span class="brand-text">JERICHO FALSARIO</span></a>
+    <input class="nav-toggle" id="nav-toggle-3" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle-3" aria-hidden="true"><span></span></label>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="projects.html" class="nav-link active">Projects</a>
+      <a href="resume.html" class="nav-link">Resume</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="projects-list">
+      <h1 class="section-title">Projects</h1>
+      <p class="muted">Click or hover to flip each card for a short summary and technologies used.</p>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article id="project-1" class="project flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Monitoring Platform</h3>
+              <p>Real-time metrics, alerting, and dashboards.</p>
+              <div class="tags"><span>GCP</span><span>Prometheus</span><span>Grafana</span></div>
+            </div>
+            <div class="flip-back">
+              <h4>What I did</h4>
+              <ul>
+                <li>Designed scalable ingestion with Pub/Sub</li>
+                <li>Implemented alerting & cost controls</li>
+                <li>On-call playbooks & runbooks</li>
+              </ul>
+              <a class="btn btn-sm" href="#">Repository</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article id="project-2" class="project flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Secure File Service</h3>
+              <p>Encrypted transfers and audit logging.</p>
+              <div class="tags"><span>Go</span><span>OAuth2</span><span>HSM</span></div>
+            </div>
+            <div class="flip-back">
+              <h4>What I did</h4>
+              <ul>
+                <li>Implemented HSM-based key rotation</li>
+                <li>RBAC and tenant isolation</li>
+                <li>End-to-end testing & benchmarks</li>
+              </ul>
+              <a class="btn btn-sm" href="#">Repository</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article id="project-3" class="project flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Automation Toolkit</h3>
+              <p>IaC templates & CLI for environment provisioning.</p>
+              <div class="tags"><span>Terraform</span><span>GitHub Actions</span><span>CLI</span></div>
+            </div>
+            <div class="flip-back">
+              <h4>What I did</h4>
+              <ul>
+                <li>Built reusable Terraform modules</li>
+                <li>CI templates for multi-account deployment</li>
+                <li>Self-service provisioning workflows</li>
+              </ul>
+              <a class="btn btn-sm" href="#">Repository</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner"><div><strong>JERICHO FALSARIO</strong><div class="muted">Full-stack & Cloud Engineer</div></div>
+    <div class="footer-links"><a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:you@example.com">you@example.com</a></div></div>
+    <div class="copyright">© <span id="year-3"></span> JERICHO FALSARIO — Built with HTML & CSS</div>
+  </footer>
+
+<script>document.getElementById('year-3').textContent = new Date().getFullYear();</script>
+</body>
+</html>
