@@ -643,6 +643,10 @@ body.admin-body {
   .admin-main {
     padding: 96px 18px 24px 18px;
   }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
   .tab-header h2 {
     display: none;
   }
@@ -702,6 +706,10 @@ body.admin-body {
   }
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+  .card-header {
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .admin-main {
     padding: 75px 12px;
