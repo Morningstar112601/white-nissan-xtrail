@@ -3,6 +3,9 @@
 let token = localStorage.getItem('admin_token') || '';
 
 document.addEventListener('DOMContentLoaded', () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('SW Reg error:', err));
+  }
   initApp();
   setupEventListeners();
 });
