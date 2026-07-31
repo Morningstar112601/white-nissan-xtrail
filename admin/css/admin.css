@@ -167,9 +167,10 @@ body.admin-body {
   background: var(--admin-sidebar-bg);
   border-right: 1px solid var(--admin-border);
   padding: 24px 18px;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 .sidebar-header {
   display: flex;
@@ -195,8 +196,8 @@ body.admin-body {
 .text-success { color: var(--admin-accent-emerald); font-size: 8px; }
 
 .sidebar-nav {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 6px;
   margin-top: 24px;
   flex-grow: 1;
@@ -684,17 +685,18 @@ body.admin-body {
     flex-shrink: 0;
   }
   .admin-sidebar {
-    position: fixed;
-    top: 0;
-    left: -280px;
-    width: 260px;
-    height: 100vh;
-    z-index: 999;
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    position: fixed !important;
+    top: 0 !important;
+    left: -280px !important;
+    width: 260px !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+    flex-direction: column !important;
   }
   .admin-sidebar.active {
-    left: 0;
+    left: 0 !important;
   }
   .admin-main {
     padding: 96px 18px 24px 18px;
