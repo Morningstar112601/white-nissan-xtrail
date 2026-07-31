@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -675,42 +675,87 @@
     }
 
     /* â”€â”€ Particle Canvas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Shared mouse position (used by canvas + cursor) ── */
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+    /* ── Particle Canvas ──────────────────────────── */
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let pts = [];
+    const CONNECT_DIST   = 120;  // particle ↔ particle line distance
+    const MOUSE_DIST     = 180;  // particle ↔ mouse line distance
+    const MOUSE_DIST_SQ  = MOUSE_DIST * MOUSE_DIST;
+
     function resizeC() { canvas.width = innerWidth; canvas.height = innerHeight; }
     function initPts() {
-      const n = Math.floor(innerWidth * innerHeight / 16000);
+      const n = Math.floor(innerWidth * innerHeight / 14000);
       pts = Array.from({ length: n }, () => ({
         x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.4 + 0.4, a: Math.random() * 0.5 + 0.1
+        vx: (Math.random() - 0.5) * 0.32, vy: (Math.random() - 0.5) * 0.32,
+        r: Math.random() * 1.5 + 0.4, a: Math.random() * 0.55 + 0.12
       }));
     }
+
     function drawPts() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      /* Move & draw dots */
       pts.forEach(p => {
-        p.x = (p.x + p.vx + canvas.width) % canvas.width;
+        p.x = (p.x + p.vx + canvas.width)  % canvas.width;
         p.y = (p.y + p.vy + canvas.height) % canvas.height;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,212,255,${p.a * 0.45})`;
+        ctx.fillStyle = `rgba(0,212,255,${p.a * 0.5})`;
         ctx.fill();
       });
+
+      /* Particle ↔ particle lines */
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
           const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
           const d = Math.hypot(dx, dy);
-          if (d < 110) {
+          if (d < CONNECT_DIST) {
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.strokeStyle = `rgba(0,212,255,${0.06 * (1 - d / 110)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(0,212,255,${0.07 * (1 - d / CONNECT_DIST)})`;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
       }
+
+      /* Particle ↔ mouse cursor lines (the subicwater.ph effect) */
+      pts.forEach(p => {
+        const dxm = p.x - mx, dym = p.y - my;
+        const dSq = dxm * dxm + dym * dym;
+        if (dSq < MOUSE_DIST_SQ) {
+          const d = Math.sqrt(dSq);
+          const alpha = 0.55 * (1 - d / MOUSE_DIST);
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mx, my);
+          ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+          ctx.lineWidth = 0.9;
+          ctx.stroke();
+          /* Brighten the dot when near cursor */
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r + 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,212,255,${alpha * 0.8})`;
+          ctx.fill();
+        }
+      });
+
+      /* Glowing dot at cursor on canvas */
+      const grad = ctx.createRadialGradient(mx, my, 0, mx, my, 60);
+      grad.addColorStop(0, 'rgba(0,212,255,0.08)');
+      grad.addColorStop(1, 'rgba(0,212,255,0)');
+      ctx.beginPath();
+      ctx.arc(mx, my, 60, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
       requestAnimationFrame(drawPts);
     }
     resizeC(); initPts(); drawPts();
@@ -719,8 +764,7 @@
     /* â”€â”€ Custom Cursor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     const cursorDot  = document.getElementById('cursor-dot');
     const cursorRing = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let rx = 0, ry = 0;
     (function animCursor() {
       cursorDot.style.left = mx + 'px'; cursorDot.style.top = my + 'px';
       rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
