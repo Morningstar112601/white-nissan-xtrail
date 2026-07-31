@@ -266,10 +266,48 @@ body{
   body{font-size:15px}
   .projects-preview{grid-template-columns:1fr}
   .projects-grid{grid-template-columns:1fr}
-  .nav{display:none}
-  .nav-btn{display:block}
   .hero-inner{padding:18px}
   .hero-art{display:none}
   .site-header{padding:12px}
   .brand-text{display:none}
+
+  /* Hero CTAs — stack on very small screens */
+  .hero-ctas{flex-wrap:wrap; gap:10px}
+  .hero-ctas .btn{width:100%; justify-content:center}
+
+  /* Badges wrap cleanly */
+  .badges{gap:8px}
+  .badge{font-size:0.8rem; padding:6px 8px}
+
+  /* Footer — stack on mobile */
+  .footer-inner{flex-direction:column; align-items:flex-start; gap:14px}
+  .footer-links{margin-top:4px}
+
+  /* Resume card — reduce padding on mobile */
+  .resume-card-inner{padding:18px !important}
+
+  /* Project flip cards — show back content on tap (touch) */
+  .flip-card:focus-within .flip-inner{transform:rotateY(180deg)}
+
+  /* Hero actions (about page) */
+  .hero-actions{flex-wrap:wrap; gap:10px}
+  .hero-actions .btn{flex:1 1 140px; justify-content:center}
+
+  /* Timeline item responsive */
+  .timeline-item{grid-template-columns:1fr !important; gap:8px !important}
+  .timeline-left{display:flex; flex-direction:row; gap:10px; align-items:center}
+
+  /* Cert grid */
+  .cert-grid{grid-template-columns:1fr !important}
 }
+
+@media (max-width:420px){
+  /* Extra small phones */
+  .section-title{font-size:1rem}
+  .hero-title{font-size:1.3rem}
+  .badge{font-size:0.75rem; padding:5px 7px}
+  .info-item{gap:10px}
+  .info-icon{width:36px; height:36px; font-size:15px}
+  .footer-inner{gap:10px}
+}
+
