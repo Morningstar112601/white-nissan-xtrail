@@ -4,239 +4,129 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About — YOUR NAME</title>
+  <title>About — JERICHO FALSARIO</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .about-layout { display: grid; grid-template-columns: 1fr 340px; gap: 36px; max-width: var(--max-width); margin: 36px auto; padding: 0 24px; }
+    .timeline-item { background: rgba(255,255,255,0.02); border-left: 3px solid var(--accent-1); padding: 18px 22px; border-radius: 0 12px 12px 0; margin-bottom: 16px; }
+    .timeline-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 4px; }
+    .timeline-org { color: var(--accent-2); font-size: 0.9rem; margin-bottom: 6px; }
+    .timeline-date { color: var(--muted); font-size: 0.85rem; margin-bottom: 10px; }
+    @media(max-width: 800px) { .about-layout { grid-template-columns: 1fr; } }
+  </style>
 </head>
 
-<body>
+<body class="page-about">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+        <rect rx="4" width="24" height="24" fill="currentColor" />
+        <text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text>
+      </svg>
+      <span class="brand-text" id="site-brand-name">JERICHO FALSARIO</span>
+    </a>
 
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle" aria-hidden="true">
+      <span></span>
+    </label>
 
-  <div class="app">
-    <header class="site-header">
-      <a class="brand" href="index.html">
-        <!-- Simple SVG logo -->
-        <svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
-          <rect rx="4" width="24" height="24" fill="currentColor" />
-          <text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12"
-            font-family="Inter, sans-serif">IT</text>
-        </svg>
-        <span class="brand-text">JERICHO FALSARIO</span>
-      </a>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="resume.html" class="nav-link">Resume</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="/admin" class="nav-link admin-nav-btn" target="_blank"><i class="fa-solid fa-lock"></i> Admin Panel</a>
+    </nav>
+  </header>
 
-      <!-- CSS hamburger (checkbox hack) -->
-      <input class="nav-toggle" id="nav-toggle" type="checkbox" />
-      <label class="nav-btn" for="nav-toggle" aria-hidden="true">
-        <span></span>
-      </label>
+  <main class="about-layout">
+    <div>
+      <h1 class="section-title">About Me</h1>
+      <p style="font-size: 1.1rem; line-height: 1.7; color: var(--muted);" id="about-bio">
+        Information Technology Engineer with extensive experience administering enterprise platforms (SAP, LMS, Lotus Notes, WPH Applications). Passionate about DevOps, network infrastructure, database optimization, and modern full-stack web development.
+      </p>
 
-      <nav class="nav">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="resume.html" class="nav-link">Resume</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-    </header>
+      <h2 style="margin-top: 36px;" class="section-title">Experience & Education</h2>
+      <div id="experience-timeline">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
 
-    <main class="about-main">
-      <section class="about-hero">
-        <div class="about-left">
-          <h1>About Me</h1>
-          <p class="lede">Detail and technical-oriented IT Engineer with a strong foundation in information
-            technology, focusing but not limited to front-end development and hardware/software
-            systems. Dedicated to ensuring system reliability, optimizing ERP and logistics platforms,
-            and delivering technical support that enhances productivity and minimizes downtime. Eager
-            to contribute technical expertise and analytical skills to Wistron InfoComm’s Management
-            Information System team.</p>
-
-          <div class="quick-stats">
-            <div class="stat"><strong>3+</strong><small>Years</small><span>Experience</span></div>
-            <div class="stat"><strong>7+</strong><small>Professional</small><span>trainings</span></div>
-            <div class="stat"><strong>8</strong><small>Certs</small><span>Completed</span></div>
-          </div>
-
-          <p class="muted">Open to: Full-time, Contract — Available for I.T Engineer roles.</p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="resume.html">View Full Resume</a>
-            <a class="btn btn-outline" href="contact.html">Contact</a>
-          </div>
-        </div>
-
-        <aside class="about-right">
-          <div class="profile-card">
-            <img src="assets/images/myprofile.jpg" alt="Profile photo" class="profile-photo">
-            <h3>Jericho Falsario</h3>
-            <p class="muted small">Information Technology Engineer</p>
-
-            <div class="contact-mini">
-              <div><strong>Wistron</strong>
-                <div class="muted">Laoag San Marcelino, Zambaels</div>
-              </div>
-              <div><strong>Email</strong><a href="mailto: falsariojericho@gmail.com">falsariojericho@gmail.com</a></div>
-              <div><strong>Looking for</strong>
-                <div class="muted">I.T Related Position</div>
-              </div>
-            </div>
-
-            <div class="profile-badges">
-              <span class="badge">ISO27000 Officer</span>
-              <span class="badge">ESD Auditor</span>
-              <span class="badge">Security for Governance</span>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section class="timeline-section">
-        <h2>Career & Education</h2>
-
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-left">
-              <time>2025 — Present</time>
-            </div>
-            <div class="timeline-right">
-              <h3>I.T Engineer — Wistron Infocomm Philippines Corporation</h3>
-
-              <ul>
-                <li>Managed daily operations and maintenance of ERP and AP systems, ensuring optimal performance and
-                  minimal downtime.</li>
-                <li>Monitored and maintained servers, system jobs, databases, printers, and production network systems
-                  (SME shop floor control, logistics management, SAP, SharePoint).</li>
-                <li>Provided main technical support for production and logistics systems; assisted users with data
-                  processing and troubleshooting.</li>
-                <li>Ensured data integrity and accuracy across SAP, logistics, and production systems.</li>
-                <li>Installed, configured, and troubleshot OA, SAP, LMS, SME, Lotus Notes, and related hardware and
-                  software.</li>
-                <li>Supported deployment and migration for LMS websites, SAP systems, and SharePoint platforms.</li>
-                <li>Provided IT Service Request support for end-users via phone, email, remote, or on-site.</li>
-                <li>Administered and maintained user accounts in SAP, LMS, SME, WPH Web Applications, and Lotus Notes.
-                </li>
-                <li>Collaborated with local and global teams on system development, improvement, and documentation.</li>
-                <li>Created and maintained ERP/AP system SOPs, user manuals, and process documentation.</li>
-                <li>Assisted with video and graphic editing requests from other departments.</li>
-                <li>Managed IT inventory, maintenance, and safekeeping of department assets.</li>
-                <li>Participated in company initiatives such as ISO and ESG-related projects.</li>
-                <li>Provided remote and on-call support for system-related incidents.</li>
-              </ul>
-            </div>
-
-          </article>
-
-          <article class="timeline-item">
-            <div class="timeline-left">
-              <time>2024 — Present</time>
-            </div>
-            <div class="timeline-right">
-              <h3>Outsource IT/Consultant – NEXXUS Outsourcing</h3>
-              <ul>
-                <li>Managed IT assets, setup, and maintenance of hardware/software systems.</li>
-                <li>Performed computer installations, LAN cabling, and network troubleshooting.</li>
-                <li>Prepared IT reports and documentation; assisted in asset inventory and management.</li>
-                <li>Supported local users in resolving system-related and technical issues.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="timeline-item">
-            <div class="timeline-left">
-              <time>2014 — 500 hours</time>
-            </div>
-            <div class="timeline-right">
-              <h3>Intern – iPhiTech IT and Digital Solutions</h3>
-              <p>Focus on distributed systems, security, and networks.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="certifications">
-        <h2>Certifications & Training</h2>
-        <div class="cert-grid">
-          <div class="cert-card">
-            <h4>Advanced Cyber Security - Threats and Governance</h4>
-            <p class="muted">Great Learning
-              Issued in May 2024
-              Credential ID DYIWDUAB.</p>
-          </div>
-          <div class="cert-card">
-            <h4>Cyber Forensics</h4>
-            <p class="muted">Great Learning
-              Issued in May 2024
-              Credential ID JIKEHUOR</p>
-          </div>
-          <div class="cert-card">
-            <h4>Ethical Hacking - Mobile Platforms and Network Architecture</h4>
-            <p class="muted">Great Learning
-              Issued in May 2024
-              Credential ID GXAFQWSF</p>
-          </div>
-          <div class="cert-card">
-            <h4>Cyber Security</h4>
-            <p class="muted">Great Learning
-              Issued in Apr 2024
-              Credential ID YURHYGEB</p>
-          </div>
-
-
-
-          <div class="cert-card">
-            <h4>Legacy JavaScript Algorithms and Data Structures</h4>
-            <p class="muted">freeCodeCamp
-              Issued in Apr 2024
-              Credential ID flsri0-ljaads</p>
-          </div>
-          <div class="cert-card">
-            <h4>Responsive Web Design</h4>
-            <p class="muted">freeCodeCamp
-              Issued in Apr 2024
-              Credential ID flsri0-rwd</p>
-          </div>
-          <div class="cert-card">
-            <h4>ESD Auditor</h4>
-            <p class="muted">Wistron InfoComm Philippines Corporation</p>
-          </div>
-          <div class="cert-card">
-            <h4>Cyber Security For Leadership</h4>
-            <p class="muted">Great Learning
-              Credential ID CMAEXLER</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="achievements">
-        <h2>Selected Achievements</h2>
-        <ul class="ach-list">
-          <li><strong>Cum Laude, Gordon College (2024)</strong> via centralized alerting, runbooks, and automation.
-          </li>
-          <li><strong>Medalya ng Kahusayan – Hon. Atty. Rolen C. Paulino Jr.</strong> that improved RTO/RPO for critical
-            services.</li>
-          <li><strong>Dean’s Lister (2020 – 2023)</strong> — delivered an auto-scaling IaC solution.</li>
-          <li><strong>International Research Conference on Information Technology Education (Paper
-              Presentation, 2024)</strong> that improved RTO/RPO for critical services.</li>
-          <li><strong>8th PSC Regional Pitching Qualifier (2023)</strong> — delivered an auto-scaling IaC solution.</li>
+    <div>
+      <div class="card" style="padding: 24px;">
+        <h3 style="margin-top:0;"><i class="fa-solid fa-bolt text-accent"></i> Key Technical Focus</h3>
+        <ul id="about-skills-list" style="list-style: none; padding: 0; margin: 0;">
+          <!-- Loaded dynamically -->
         </ul>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div><strong>JERICHO FALSARIO</strong>
-          <div class="muted">Information Technology Engineer</div>
-        </div>
-        <div class="footer-links">
-          <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://ph.linkedin.com/in/jerichofalsari0" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="mailto:falsariojericho@gmail.com">falsariojericho@gmail.com</a>
+        <div style="margin-top: 24px;">
+          <a class="btn btn-primary btn-sm" href="resume.html" style="width: 100%; justify-content: center;">View Detailed Resume</a>
         </div>
       </div>
-      <div class="copyright">© <span id="year-2"></span> Jericho Falsario — Built with HTML & CSS</div>
-    </footer>
-  </div>
+    </div>
+  </main>
 
-  <script>document.getElementById('year-2').textContent = new Date().getFullYear();</script>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong id="footer-name">JERICHO FALSARIO</strong>
+        <div class="muted">Information Technology Engineer</div>
+      </div>
+      <div class="footer-links">
+        <a id="footer-github" href="#" target="_blank">GitHub</a>
+        <a id="footer-linkedin" href="#" target="_blank">LinkedIn</a>
+        <a id="footer-email" href="#">Email</a>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> Jericho Falsario — Full-Stack Portfolio</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function loadAboutPage() {
+      try {
+        const settings = await fetch('/api/settings').then(r => r.json());
+        if (settings.name) document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
+        if (settings.hero_subtitle) document.getElementById('about-bio').textContent = settings.hero_subtitle;
+        if (settings.github) document.getElementById('footer-github').href = settings.github;
+        if (settings.linkedin) document.getElementById('footer-linkedin').href = settings.linkedin;
+        if (settings.email) document.getElementById('footer-email').href = 'mailto:' + settings.email;
+
+        // Load Experiences
+        const experiences = await fetch('/api/experience').then(r => r.json());
+        const timelineContainer = document.getElementById('experience-timeline');
+        if (experiences.length) {
+          timelineContainer.innerHTML = experiences.map(e => `
+            <div class="timeline-item">
+              <div class="timeline-title">${e.title}</div>
+              <div class="timeline-org">${e.organization} ${e.location ? '• ' + e.location : ''}</div>
+              <div class="timeline-date"><i class="fa-regular fa-calendar"></i> ${e.start_date} — ${e.end_date || 'Present'}</div>
+              <p style="margin:0; font-size:0.9rem; color:var(--text);">${e.description || ''}</p>
+            </div>
+          `).join('');
+        }
+
+        // Load Skills list preview
+        const skills = await fetch('/api/skills').then(r => r.json());
+        const skillsContainer = document.getElementById('about-skills-list');
+        if (skills.length) {
+          skillsContainer.innerHTML = skills.map(s => `
+            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size:0.9rem;">
+              <strong>${s.category}:</strong> ${s.name}
+            </li>
+          `).join('');
+        }
+
+      } catch (err) {
+        console.error('About page load error:', err);
+      }
+    }
+
+    loadAboutPage();
+  </script>
 </body>
-
 </html>

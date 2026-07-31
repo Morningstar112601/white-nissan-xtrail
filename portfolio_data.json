@@ -1,0 +1,169 @@
+{
+  "users": [
+    {
+      "id": 1785465837927,
+      "username": "admin",
+      "password": "$2a$10$R61G7QIk5ZuHI1i7YRngIeqTnOlqwL8/XBxmXRcTxtswMcGi1aIMu",
+      "email": "falsariojericho@gmail.com",
+      "created_at": "2026-07-31T02:43:57.927Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1785465838068,
+      "title": "Real-time Monitoring Platform",
+      "description": "Scalable telemetry pipeline with Prometheus & Pub/Sub, alerting & dashboards.",
+      "detailed_desc": "Implemented ingestion autoscaling and cut mean time to detection by 60%. Designed low-latency real-time data visualizers and threshold alerting systems.",
+      "image_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
+      "tags": "GCP,Prometheus,Grafana",
+      "live_url": "#",
+      "github_url": "#",
+      "is_featured": 1,
+      "display_order": 1,
+      "created_at": "2026-07-31T02:43:58.068Z"
+    },
+    {
+      "id": 1785465838080,
+      "title": "Secure File Transfer Service",
+      "description": "End-to-end encrypted transfer with audit logs & RBAC for enterprise clients.",
+      "detailed_desc": "Designed HSM-based key rotation and compliance logging to meet SOC2 requirements. Implemented secure chunked streaming and granular user access policies.",
+      "image_url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop",
+      "tags": "Security,Go,OAuth2",
+      "live_url": "#",
+      "github_url": "#",
+      "is_featured": 1,
+      "display_order": 2,
+      "created_at": "2026-07-31T02:43:58.080Z"
+    },
+    {
+      "id": 1785465838093,
+      "title": "Automation Toolkit",
+      "description": "CLI and IaC templates for rapid environment provisioning and CI/CD pipelines.",
+      "detailed_desc": "Reduced provisioning times from days to minutes while enforcing security baselines across hybrid-cloud infrastructures.",
+      "image_url": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&auto=format&fit=crop",
+      "tags": "Terraform,CI/CD,Automation",
+      "live_url": "#",
+      "github_url": "#",
+      "is_featured": 1,
+      "display_order": 3,
+      "created_at": "2026-07-31T02:43:58.093Z"
+    }
+  ],
+  "skills": [
+    {
+      "id": 1785465838017,
+      "category": "Systems & Tools",
+      "name": "SAP, LMS, SME, OA, SharePoint, Lotus Notes, WordPress, Shopify",
+      "percentage": 90,
+      "display_order": 1
+    },
+    {
+      "id": 1785465838023,
+      "category": "Programming & Web",
+      "name": "HTML, CSS, JavaScript",
+      "percentage": 85,
+      "display_order": 2
+    },
+    {
+      "id": 1785465838030,
+      "category": "Software & Productivity",
+      "name": "Microsoft Office/365, Canva, Adobe Tools",
+      "percentage": 80,
+      "display_order": 3
+    },
+    {
+      "id": 1785465838039,
+      "category": "Networking & Hardware",
+      "name": "LAN setup, cabling, printer & hardware troubleshooting",
+      "percentage": 78,
+      "display_order": 4
+    },
+    {
+      "id": 1785465838048,
+      "category": "Database & Analytics",
+      "name": "SQL, data reporting, system integrity checks",
+      "percentage": 78,
+      "display_order": 5
+    },
+    {
+      "id": 1785465838056,
+      "category": "System Administration",
+      "name": "Administered systems such as SAP, LMS, SME, WPH Web Applications, Lotus Notes",
+      "percentage": 78,
+      "display_order": 6
+    },
+    {
+      "id": 1785467006181,
+      "category": "Programming & Web",
+      "name": "PHP, C#",
+      "percentage": 50,
+      "display_order": 0
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1785465838108,
+      "type": "work",
+      "title": "System Administrator / IT Specialist",
+      "organization": "Enterprise Solutions Corp",
+      "location": "Manila, Philippines",
+      "start_date": "2021-01",
+      "end_date": "Present",
+      "description": "Managed & maintained enterprise systems (SAP, LMS, SME, Lotus Notes, WPH Web Applications). Overseeing system integrity, LAN cabling, database reporting, and tier-3 support.",
+      "display_order": 1
+    },
+    {
+      "id": 1785465838121,
+      "type": "work",
+      "title": "Full-Stack Developer & Support Engineer",
+      "organization": "Tech Innovations Inc",
+      "location": "Remote",
+      "start_date": "2019-03",
+      "end_date": "2020-12",
+      "description": "Built custom Web Applications (PHP, MERN, C#), optimized SQL queries, and automated administrative operations across department workflows.",
+      "display_order": 2
+    },
+    {
+      "id": 1785465838133,
+      "type": "education",
+      "title": "Bachelor of Science in Information Technology",
+      "organization": "State University of Information Technology",
+      "location": "Philippines",
+      "start_date": "2015-06",
+      "end_date": "2019-04",
+      "description": "Specialized in Software Engineering, Network Administration, and Database Systems.",
+      "display_order": 3
+    }
+  ],
+  "messages": [
+    {
+      "id": 1785467831814,
+      "sender_name": "jERICHO ARIZABAL fALSARIO",
+      "sender_email": "Jericho_Falsario@wistron.com",
+      "subject": "🔒 Source Code Access Request: Real-time Monitoring Platform",
+      "message": "SOURCE CODE ACCESS REQUEST\n----------------------------------------\nProject Requested: Real-time Monitoring Platform\nRequester Name: jERICHO ARIZABAL fALSARIO\nRequester Email: Jericho_Falsario@wistron.com\nCompany / Organization / Purpose: Wistron InfoComm(Philippines)\n\nAdditional Note / Intended Use:\nI would like to see",
+      "is_read": 0,
+      "created_at": "2026-07-31T03:17:11.814Z"
+    }
+  ],
+  "settings": {
+    "name": "Jericho Falsario",
+    "title": "Information Technology Engineer",
+    "hero_headline": "With A.I I build production ready monitoring system / scalable systems & seamless user experiences.",
+    "hero_subtitle": "Hi I'm Echo!",
+    "email": "falsariojericho@gmail.com",
+    "linkedin": "https://ph.linkedin.com/in/jerichofalsari0",
+    "github": "https://github.com/Morningstar112601/white-nissan-xtrail",
+    "resume_filename": "Jericho_Falsario_Resume.pdf",
+    "resume_url": "/uploads/resume-1785466267623.pdf",
+    "badge_1": "",
+    "badge_2": "",
+    "badge_3": "",
+    "phone": "",
+    "location": "",
+    "availability": "",
+    "twitter": "",
+    "facebook": "",
+    "test": "this is a test"
+  }
+}

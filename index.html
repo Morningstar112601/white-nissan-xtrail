@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>JERICHO FALSARIO — I.T. Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
@@ -13,15 +14,13 @@
   <!-- Header / Nav -->
   <header class="site-header">
     <a class="brand" href="index.html">
-      <!-- Simple SVG logo -->
       <svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
         <rect rx="4" width="24" height="24" fill="currentColor" />
         <text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text>
       </svg>
-      <span class="brand-text">YOUR NAME</span>
+      <span class="brand-text" id="site-brand-name">JERICHO FALSARIO</span>
     </a>
 
-    <!-- CSS hamburger (checkbox hack) -->
     <input class="nav-toggle" id="nav-toggle" type="checkbox" />
     <label class="nav-btn" for="nav-toggle" aria-hidden="true">
       <span></span>
@@ -33,6 +32,7 @@
       <a href="projects.html" class="nav-link">Projects</a>
       <a href="resume.html" class="nav-link">Resume</a>
       <a href="contact.html" class="nav-link">Contact</a>
+      <a href="/admin" class="nav-link admin-nav-btn" target="_blank"><i class="fa-solid fa-lock"></i> Admin Panel</a>
     </nav>
   </header>
 
@@ -40,23 +40,22 @@
   <main>
     <section class="hero">
       <div class="hero-inner">
-        <h1 class="hero-title">I build secure, scalable systems & seamless user experiences.</h1>
-        <p class="hero-sub">Full-stack engineer | Cloud & DevOps | Cybersecurity fundamentals — I turn complex problems
-          into reliable products.</p>
+        <h1 class="hero-title" id="hero-headline">I build secure, scalable systems & seamless user experiences.</h1>
+        <p class="hero-sub" id="hero-subtitle">Full-stack engineer | Cloud & DevOps | Cybersecurity fundamentals — I turn complex problems into reliable products.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="projects.html">View Projects</a>
-          <a class="btn btn-outline" href="resume.html">Download Resume</a>
+          <a class="btn btn-outline" href="/api/experience/download-resume" id="download-resume-btn"><i class="fa-solid fa-download"></i> Download Resume</a>
         </div>
 
         <!-- Key achievements badges -->
-        <div class="badges">
+        <div class="badges" id="hero-badges">
           <span class="badge">5+ Years Experience</span>
           <span class="badge">Google Cloud Certified</span>
           <span class="badge">Top 10% Hackathon Winner</span>
         </div>
       </div>
 
-      <!-- Hero illustration (simple) -->
+      <!-- Hero illustration -->
       <div class="hero-art">
         <svg viewBox="0 0 600 400" class="art-svg" aria-hidden="true">
           <defs>
@@ -69,7 +68,6 @@
           <g transform="translate(40,40)">
             <rect x="0" y="0" width="220" height="140" rx="12" fill="#fff" opacity="0.9"></rect>
             <rect x="240" y="10" width="300" height="180" rx="12" fill="#fff" opacity="0.9"></rect>
-            <!-- animated dots -->
             <circle class="dot" cx="520" cy="30" r="6" fill="#7b61ff"></circle>
             <circle class="dot dot-2" cx="500" cy="60" r="6" fill="#00d4ff"></circle>
           </g>
@@ -77,127 +75,112 @@
       </div>
     </section>
 
-    <!-- Skills -->
+    <!-- Technical Skills -->
     <section class="skills">
       <h2 class="section-title">Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill">
-          <div class="skill-header">
-            <span>Systems & Tools: SAP, LMS, SME, OA, SharePoint, Lotus Notes, WordPress,
-              Shopify</span>
-            <span class="skill-percent">90%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--value:90%"></div>
-          </div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span>Programming & Web: HTML, CSS, JavaScript, PHP, C#, MERN</span><span class="skill-percent">85%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--value:85%"></div>
-          </div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span>Software: Microsoft Office/365, Canva, Adobe Tools</span><span class="skill-percent">80%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--value:80%"></div>
-          </div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span>Networking: LAN setup, cabling, printer & hardware troubleshooting</span><span
-              class="skill-percent">78%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--value:78%"></div>
-          </div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span>Database: SQL, data reporting, system integrity checks</span><span class="skill-percent">78%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--value:78%"></div>
-          </div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span>System Administrator: Administered and maintained systems such us SAP, LMS,
-              SME, WPH Web Applications, and Lotus Notes.</span><span class="skill-percent">78%</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--value:78%"></div>
-          </div>
-        </div>
+      <div class="skills-grid" id="public-skills-grid">
+        <!-- Loaded dynamically via API -->
       </div>
     </section>
 
     <!-- Featured projects preview -->
     <section class="featured">
       <h2 class="section-title">Featured Projects</h2>
-      <div class="projects-preview">
-        <article class="card project-card">
-          <div class="card-front">
-            <h3>Real-time Monitoring Platform</h3>
-            <p>Scalable telemetry pipeline with Prometheus & Pub/Sub, alerting & dashboards.</p>
-            <div class="tags"><span>GCP</span><span>Prometheus</span><span>Grafana</span></div>
-          </div>
-          <div class="card-back">
-            <p>Implemented ingestion autoscaling and cut mean time to detection by 60%.</p>
-            <a class="btn btn-sm" href="projects.html#project-1">Read more</a>
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <div class="card-front">
-            <h3>Secure File Transfer Service</h3>
-            <p>End-to-end encrypted transfer with audit logs & RBAC for enterprise clients.</p>
-            <div class="tags"><span>Security</span><span>Go</span><span>OAuth2</span></div>
-          </div>
-          <div class="card-back">
-            <p>Designed HSM-based key rotation and compliance logging to meet SOC2 requirements.</p>
-            <a class="btn btn-sm" href="projects.html#project-2">Read more</a>
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <div class="card-front">
-            <h3>Automation Toolkit</h3>
-            <p>CLI and IaC templates for rapid environment provisioning and CI/CD pipelines.</p>
-            <div class="tags"><span>Terraform</span><span>CI</span><span>Automation</span></div>
-          </div>
-          <div class="card-back">
-            <p>Reduced provisioning times from days to minutes while enforcing security baselines.</p>
-            <a class="btn btn-sm" href="projects.html#project-3">Read more</a>
-          </div>
-        </article>
+      <div class="projects-preview" id="public-featured-projects">
+        <!-- Loaded dynamically via API -->
       </div>
     </section>
 
   </main>
 
   <footer class="site-footer">
-      <div class="footer-inner">
-        <div><strong>JERICHO FALSARIO</strong>
-          <div class="muted">Information Technology Engineer</div>
-        </div>
-        <div class="footer-links">
-          <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://ph.linkedin.com/in/jerichofalsari0" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="mailto:falsariojericho@gmail.com">falsariojericho@gmail.com</a>
-        </div>
+    <div class="footer-inner">
+      <div>
+        <strong id="footer-name">JERICHO FALSARIO</strong>
+        <div class="muted" id="footer-title">Information Technology Engineer</div>
       </div>
-      <div class="copyright">© <span id="year-2"></span> Jericho Falsario — Built with HTML & CSS</div>
-    </footer>
+      <div class="footer-links">
+        <a id="footer-github" href="#" target="_blank" rel="noreferrer">GitHub</a>
+        <a id="footer-linkedin" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a id="footer-email" href="#">Email</a>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> <span id="copyright-name">Jericho Falsario</span> — Full-Stack Portfolio</div>
+  </footer>
 
   <script>
-    // only small enhancement: set year. This is not necessary — you can remove to keep strictly HTML/CSS.
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function loadPublicHomeData() {
+      try {
+        // Load Settings
+        const settings = await fetch('/api/settings').then(r => r.json());
+        if (settings.name) {
+          document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
+          document.getElementById('footer-name').textContent = settings.name.toUpperCase();
+          document.getElementById('copyright-name').textContent = settings.name;
+        }
+        if (settings.hero_headline) document.getElementById('hero-headline').textContent = settings.hero_headline;
+        if (settings.hero_subtitle) document.getElementById('hero-subtitle').textContent = settings.hero_subtitle;
+        if (settings.title) document.getElementById('footer-title').textContent = settings.title;
+        
+        if (settings.github) document.getElementById('footer-github').href = settings.github;
+        if (settings.linkedin) document.getElementById('footer-linkedin').href = settings.linkedin;
+        if (settings.email) document.getElementById('footer-email').href = 'mailto:' + settings.email;
+
+        // Badges
+        const badgesContainer = document.getElementById('hero-badges');
+        const badgeList = [settings.badge_1, settings.badge_2, settings.badge_3].filter(Boolean);
+        if (badgeList.length) {
+          badgesContainer.innerHTML = badgeList.map(b => `<span class="badge">${b}</span>`).join('');
+        }
+
+        // Load Skills
+        const skills = await fetch('/api/skills').then(r => r.json());
+        const skillsGrid = document.getElementById('public-skills-grid');
+        if (skills.length) {
+          skillsGrid.innerHTML = skills.map(s => `
+            <div class="skill">
+              <div class="skill-header">
+                <span><strong>${s.category}:</strong> ${s.name}</span>
+                <span class="skill-percent">${s.percentage}%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="--value:${s.percentage}%"></div>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Load Featured Projects
+        const projects = await fetch('/api/projects').then(r => r.json());
+        const featuredProjects = projects.filter(p => p.is_featured).slice(0, 3);
+        const projectsPreview = document.getElementById('public-featured-projects');
+        
+        if (featuredProjects.length) {
+          projectsPreview.innerHTML = featuredProjects.map((p, idx) => `
+            <article class="card project-card">
+              <div class="card-front">
+                <h3>${p.title}</h3>
+                <p>${p.description}</p>
+                <div class="tags">
+                  ${(p.tags || '').split(',').map(t => `<span>${t.trim()}</span>`).join('')}
+                </div>
+              </div>
+              <div class="card-back">
+                <p>${p.detailed_desc || p.description}</p>
+                <a class="btn btn-sm" href="projects.html#project-${p.id}">View details</a>
+              </div>
+            </article>
+          `).join('');
+        }
+
+      } catch (err) {
+        console.error('Home dynamic load error:', err);
+      }
+    }
+
+    loadPublicHomeData();
   </script>
 </body>
-
 </html>

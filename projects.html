@@ -1,109 +1,578 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Projects — JERICHO FALSARIO</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .hidden { display: none !important; }
+
+    .maintenance-banner {
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(123, 97, 255, 0.15));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .icon-maint { font-size: 28px; color: #f59e0b; }
+
+    .filter-bar { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .filter-btn { padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--muted); cursor: pointer; font-size: 0.85rem; }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent-1); color: #fff; border-color: var(--accent-1); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+    
+    .full-project-card { 
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(7, 11, 19, 0.8)); 
+      border: 1px solid rgba(255,255,255,0.08); 
+      border-radius: 16px; 
+      overflow: hidden; 
+      display: flex; 
+      flex-direction: column; 
+      transition: transform 0.25s, box-shadow 0.25s; 
+    }
+    .full-project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.6); }
+    
+    .card-img-holder { 
+      height: 200px; 
+      overflow: hidden; 
+      background: #0b1220; 
+      position: relative; 
+      cursor: pointer; 
+    }
+    .card-img-holder img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .card-img-holder:hover img { transform: scale(1.05); }
+    .gallery-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    
+    .card-content { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-content h3 { margin: 0 0 8px; font-size: 1.25rem; font-weight: 700; }
+    .card-content p { color: var(--muted); font-size: 0.9rem; flex-grow: 1; margin-bottom: 18px; line-height: 1.6; }
+    .card-footer-btns { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+    .btn-row { display: flex; gap: 10px; }
+
+    .btn-request-code {
+      background: linear-gradient(90deg, rgba(123, 97, 255, 0.2), rgba(0, 212, 255, 0.15));
+      border: 1px solid var(--accent-1);
+      color: var(--text);
+      width: 100%;
+      justify-content: center;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+    .btn-request-code:hover {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: #000;
+      box-shadow: 0 6px 20px rgba(123, 97, 255, 0.3);
+    }
+
+    /* SLIDABLE LIGHTBOX MODAL */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: transparent;
+      border: 0;
+      color: #fff;
+      font-size: 32px;
+      cursor: pointer;
+      z-index: 2010;
+    }
+    .lightbox-container {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      max-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      animation: zoomIn 0.25s ease-out;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: var(--accent-1); }
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
+    
+    .lightbox-footer {
+      margin-top: 16px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .lightbox-counter { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+    .lightbox-thumbnails { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .thumb-img {
+      width: 50px;
+      height: 38px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.5;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .thumb-img.active, .thumb-img:hover { opacity: 1; border-color: var(--accent-2); }
+
+    /* REQUEST MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 520px;
+      padding: 28px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      box-sizing: border-box;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .modal-header h3 { margin: 0; font-size: 1.2rem; }
+    .modal-close { background: transparent; border: 0; color: var(--muted); font-size: 24px; cursor: pointer; }
+    .modal-close:hover { color: #fff; }
+
+    .modal-card .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .modal-card .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .modal-card .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+      display: block;
+    }
+    .modal-card .form-control:focus {
+      outline: none;
+      border-color: var(--accent-1);
+      box-shadow: 0 0 0 3px rgba(123, 97, 255, 0.2);
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
 </head>
+
 <body class="page-projects">
   <header class="site-header">
-    <a class="brand" href="index.html"><svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect rx="4" width="24" height="24" fill="currentColor" /><text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text></svg><span class="brand-text">JERICHO FALSARIO</span></a>
-    <input class="nav-toggle" id="nav-toggle-3" type="checkbox" />
-    <label class="nav-btn" for="nav-toggle-3" aria-hidden="true"><span></span></label>
+    <a class="brand" href="index.html">
+      <svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+        <rect rx="4" width="24" height="24" fill="currentColor" />
+        <text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text>
+      </svg>
+      <span class="brand-text" id="site-brand-name">JERICHO FALSARIO</span>
+    </a>
+
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle" aria-hidden="true">
+      <span></span>
+    </label>
+
     <nav class="nav">
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
       <a href="projects.html" class="nav-link active">Projects</a>
       <a href="resume.html" class="nav-link">Resume</a>
       <a href="contact.html" class="nav-link">Contact</a>
+      <a href="/admin" class="nav-link admin-nav-btn" target="_blank"><i class="fa-solid fa-lock"></i> Admin Panel</a>
     </nav>
   </header>
 
-  <main>
-    <section class="projects-list">
-      <h1 class="section-title">Projects</h1>
-      <p class="muted">Click or hover to flip each card for a short summary and technologies used.</p>
+  <main style="max-width: var(--max-width); margin: 36px auto; padding: 0 24px;">
+    <section>
+      <!-- MAINTENANCE BANNER -->
+      <div id="projects-maintenance-banner" class="maintenance-banner hidden">
+        <i class="fa-solid fa-wrench icon-maint"></i>
+        <div>
+          <strong id="maint-title" style="font-size: 1.1rem; color: #fff;">Projects Maintenance in Progress</strong>
+          <p id="maint-msg" style="margin: 4px 0 0; color: var(--muted); font-size: 0.9rem;">Projects section is currently undergoing maintenance and updates.</p>
+        </div>
+      </div>
 
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <article id="project-1" class="project flip-card">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <h3>Monitoring Platform</h3>
-              <p>Real-time metrics, alerting, and dashboards.</p>
-              <div class="tags"><span>GCP</span><span>Prometheus</span><span>Grafana</span></div>
-            </div>
-            <div class="flip-back">
-              <h4>What I did</h4>
-              <ul>
-                <li>Designed scalable ingestion with Pub/Sub</li>
-                <li>Implemented alerting & cost controls</li>
-                <li>On-call playbooks & runbooks</li>
-              </ul>
-              <a class="btn btn-sm" href="#">Repository</a>
-            </div>
-          </div>
-        </article>
+      <h1 class="section-title" id="projects-header-title">All Projects</h1>
+      <p style="color: var(--muted); margin-bottom: 24px;" id="projects-header-subtitle">A showcase of software systems, DevOps pipelines, automation toolkits, and infrastructure engineering.</p>
+      
+      <div class="filter-bar" id="tag-filters">
+        <button class="filter-btn active" data-tag="all">All Projects</button>
+      </div>
 
-        <!-- Project 2 -->
-        <article id="project-2" class="project flip-card">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <h3>Secure File Service</h3>
-              <p>Encrypted transfers and audit logging.</p>
-              <div class="tags"><span>Go</span><span>OAuth2</span><span>HSM</span></div>
-            </div>
-            <div class="flip-back">
-              <h4>What I did</h4>
-              <ul>
-                <li>Implemented HSM-based key rotation</li>
-                <li>RBAC and tenant isolation</li>
-                <li>End-to-end testing & benchmarks</li>
-              </ul>
-              <a class="btn btn-sm" href="#">Repository</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3 -->
-        <article id="project-3" class="project flip-card">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <h3>Automation Toolkit</h3>
-              <p>IaC templates & CLI for environment provisioning.</p>
-              <div class="tags"><span>Terraform</span><span>GitHub Actions</span><span>CLI</span></div>
-            </div>
-            <div class="flip-back">
-              <h4>What I did</h4>
-              <ul>
-                <li>Built reusable Terraform modules</li>
-                <li>CI templates for multi-account deployment</li>
-                <li>Self-service provisioning workflows</li>
-              </ul>
-              <a class="btn btn-sm" href="#">Repository</a>
-            </div>
-          </div>
-        </article>
+      <div class="projects-grid" id="public-projects-grid">
+        <!-- Loaded dynamically -->
       </div>
     </section>
   </main>
 
- <footer class="site-footer">
-      <div class="footer-inner">
-        <div><strong>JERICHO FALSARIO</strong>
-          <div class="muted">Information Technology Engineer</div>
-        </div>
-        <div class="footer-links">
-          <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://ph.linkedin.com/in/jerichofalsari0" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="mailto:falsariojericho@gmail.com">falsariojericho@gmail.com</a>
-        </div>
-      </div>
-      <div class="copyright">© <span id="year-2"></span> Jericho Falsario — Built with HTML & CSS</div>
-    </footer>
+  <!-- SLIDABLE LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="lightbox-overlay hidden">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    
+    <div class="lightbox-container">
+      <button class="lightbox-nav lightbox-prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+      <img id="lightbox-current-img" class="lightbox-img" src="" alt="Project Screenshot">
+      <button class="lightbox-nav lightbox-next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
 
-<script>document.getElementById('year-3').textContent = new Date().getFullYear();</script>
+    <div class="lightbox-footer">
+      <div class="lightbox-counter" id="lightbox-counter">Image 1 of 1</div>
+      <div class="lightbox-thumbnails" id="lightbox-thumbnails"></div>
+    </div>
+  </div>
+
+  <!-- REQUEST SOURCE CODE ACCESS MODAL -->
+  <div id="request-code-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="request-modal-title"><i class="fa-solid fa-lock text-accent"></i> Request Source Code Access</h3>
+        <button class="modal-close" onclick="closeRequestModal()">&times;</button>
+      </div>
+      <form id="request-code-form">
+        <input type="hidden" id="req-project-title">
+        
+        <div class="form-group">
+          <label>Project</label>
+          <input type="text" id="req-project-display" class="form-control" readonly style="opacity: 0.8;">
+        </div>
+        <div class="form-group">
+          <label>Your Full Name *</label>
+          <input type="text" id="req-name" class="form-control" placeholder="e.g. Alex Johnson" required>
+        </div>
+        <div class="form-group">
+          <label>Your Email Address *</label>
+          <input type="email" id="req-email" class="form-control" placeholder="alex@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Company / Organization / Purpose *</label>
+          <input type="text" id="req-organization" class="form-control" placeholder="e.g. Employer / Code Review / Client Evaluation" required>
+        </div>
+        <div class="form-group">
+          <label>Message / Additional Details</label>
+          <textarea id="req-message" class="form-control" rows="3" placeholder="Explain why you would like source code access..."></textarea>
+        </div>
+        
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+          <button type="button" class="btn btn-outline" onclick="closeRequestModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong id="footer-name">JERICHO FALSARIO</strong>
+        <div class="muted">Information Technology Engineer</div>
+      </div>
+      <div class="footer-links">
+        <a id="footer-github" href="#" target="_blank">GitHub</a>
+        <a id="footer-linkedin" href="#" target="_blank">LinkedIn</a>
+        <a id="footer-email" href="#">Email</a>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> Jericho Falsario — Full-Stack Portfolio</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    let allProjects = [];
+    let currentGallery = [];
+    let currentGalleryIdx = 0;
+
+    const fallbackImg = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop';
+
+    async function loadProjectsPage() {
+      try {
+        const settings = await fetch('/api/settings').then(r => r.json());
+        if (settings.name) document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
+        if (settings.github) document.getElementById('footer-github').href = settings.github;
+        if (settings.linkedin) document.getElementById('footer-linkedin').href = settings.linkedin;
+        if (settings.email) document.getElementById('footer-email').href = 'mailto:' + settings.email;
+
+        // Custom Projects Header & Subtitle
+        if (settings.projects_page_title) {
+          document.getElementById('projects-header-title').textContent = settings.projects_page_title;
+        }
+        if (settings.projects_page_subtitle) {
+          document.getElementById('projects-header-subtitle').textContent = settings.projects_page_subtitle;
+        }
+
+        // Maintenance Mode Toggle
+        if (settings.projects_maintenance_mode === '1' || settings.projects_maintenance_mode === 1) {
+          const banner = document.getElementById('projects-maintenance-banner');
+          banner.classList.remove('hidden');
+          if (settings.projects_maintenance_message) {
+            document.getElementById('maint-msg').textContent = settings.projects_maintenance_message;
+          }
+        }
+
+        allProjects = await fetch('/api/projects').then(r => r.json());
+        
+        // Build Filter tags
+        const tagSet = new Set();
+        allProjects.forEach(p => {
+          (p.tags || '').split(',').forEach(t => {
+            if (t.trim()) tagSet.add(t.trim());
+          });
+        });
+
+        const filterContainer = document.getElementById('tag-filters');
+        tagSet.forEach(tag => {
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.textContent = tag;
+          btn.dataset.tag = tag;
+          btn.onclick = () => filterByTag(tag, btn);
+          filterContainer.appendChild(btn);
+        });
+
+        renderProjects(allProjects);
+      } catch (err) {
+        console.error('Projects page error:', err);
+      }
+    }
+
+    function renderProjects(projects) {
+      const container = document.getElementById('public-projects-grid');
+      if (!projects.length) {
+        container.innerHTML = `<p style="color:var(--muted)">No projects match the selected filter.</p>`;
+        return;
+      }
+
+      container.innerHTML = projects.map(p => {
+        const images = (p.images && p.images.length) ? p.images : [p.image_url || fallbackImg];
+        const mainImg = images[0] || fallbackImg;
+        const imgCount = images.length;
+
+        return `
+          <article class="full-project-card" id="project-${p.id}">
+            <div class="card-img-holder" onclick='openLightbox(${JSON.stringify(images)}, 0)'>
+              <img src="${mainImg}" alt="${p.title}" onerror="this.src='${fallbackImg}'">
+              <div class="gallery-badge">
+                <i class="fa-solid fa-expand"></i> ${imgCount} Photo${imgCount > 1 ? 's' : ''}
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>${p.title}</h3>
+              <p>${p.detailed_desc || p.description}</p>
+              
+              <div class="tags" style="margin-bottom: 18px;">
+                ${(p.tags || '').split(',').map(t => `<span>${t.trim()}</span>`).join('')}
+              </div>
+
+              <div class="card-footer-btns">
+                <div class="btn-row">
+                  ${p.live_url && p.live_url !== '#' ? `<a href="${p.live_url}" target="_blank" class="btn btn-sm btn-primary" style="flex:1; justify-content:center;"><i class="fa-solid fa-external-link"></i> Live Demo</a>` : ''}
+                  ${p.github_url && p.github_url !== '#' ? `<a href="${p.github_url}" target="_blank" class="btn btn-sm btn-outline" style="flex:1; justify-content:center;"><i class="fa-brands fa-github"></i> Repository</a>` : ''}
+                </div>
+                <button class="btn btn-request-code" onclick='openRequestModal("${p.title.replace(/"/g, '&quot;')}")'>
+                  <i class="fa-solid fa-key"></i> Request Permission to View Source Code
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function filterByTag(tag, btnElement) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      if (tag === 'all') {
+        renderProjects(allProjects);
+      } else {
+        const filtered = allProjects.filter(p => (p.tags || '').includes(tag));
+        renderProjects(filtered);
+      }
+    }
+
+    // LIGHTBOX SLIDESHOW LOGIC
+    function openLightbox(imagesArray, startIndex = 0) {
+      currentGallery = imagesArray.length ? imagesArray : [fallbackImg];
+      currentGalleryIdx = startIndex;
+      updateLightboxDisplay();
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+      document.addEventListener('keydown', handleLightboxKeydown);
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+      document.removeEventListener('keydown', handleLightboxKeydown);
+    }
+
+    function updateLightboxDisplay() {
+      const img = document.getElementById('lightbox-current-img');
+      img.src = currentGallery[currentGalleryIdx] || fallbackImg;
+      img.onerror = () => { img.src = fallbackImg; };
+
+      document.getElementById('lightbox-counter').textContent = `Image ${currentGalleryIdx + 1} of ${currentGallery.length}`;
+
+      const thumbsContainer = document.getElementById('lightbox-thumbnails');
+      thumbsContainer.innerHTML = currentGallery.map((src, i) => `
+        <img class="thumb-img ${i === currentGalleryIdx ? 'active' : ''}" src="${src}" onerror="this.src='${fallbackImg}'" onclick="jumpToSlide(${i})">
+      `).join('');
+    }
+
+    function nextSlide() {
+      currentGalleryIdx = (currentGalleryIdx + 1) % currentGallery.length;
+      updateLightboxDisplay();
+    }
+
+    function prevSlide() {
+      currentGalleryIdx = (currentGalleryIdx - 1 + currentGallery.length) % currentGallery.length;
+      updateLightboxDisplay();
+    }
+
+    function jumpToSlide(index) {
+      currentGalleryIdx = index;
+      updateLightboxDisplay();
+    }
+
+    function handleLightboxKeydown(e) {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') closeLightbox();
+    }
+
+    // REQUEST SOURCE CODE MODAL LOGIC
+    function openRequestModal(projectTitle) {
+      document.getElementById('req-project-title').value = projectTitle;
+      document.getElementById('req-project-display').value = projectTitle;
+      document.getElementById('request-code-form').reset();
+      document.getElementById('req-project-title').value = projectTitle;
+      document.getElementById('req-project-display').value = projectTitle;
+      document.getElementById('request-code-modal').classList.remove('hidden');
+    }
+
+    function closeRequestModal() {
+      document.getElementById('request-code-modal').classList.add('hidden');
+    }
+
+    document.getElementById('request-code-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('req-project-title').value;
+      const name = document.getElementById('req-name').value;
+      const email = document.getElementById('req-email').value;
+      const organization = document.getElementById('req-organization').value;
+      const userMessage = document.getElementById('req-message').value;
+
+      const subject = `🔒 Source Code Access Request: ${title}`;
+      const message = `
+SOURCE CODE ACCESS REQUEST
+----------------------------------------
+Project Requested: ${title}
+Requester Name: ${name}
+Requester Email: ${email}
+Company / Organization / Purpose: ${organization}
+
+Additional Note / Intended Use:
+${userMessage || 'None specified.'}
+      `.trim();
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message })
+        });
+
+        if (res.ok) {
+          alert(`Thank you, ${name}! Your request to view the source code for "${title}" has been sent to Jericho. He will review your request shortly.`);
+          closeRequestModal();
+        } else {
+          alert('Failed to submit source code request. Please try again.');
+        }
+      } catch (err) {
+        alert('Network error submitting request.');
+      }
+    });
+
+    loadProjectsPage();
+  </script>
 </body>
 </html>

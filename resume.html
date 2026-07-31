@@ -1,95 +1,123 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Resume — JERICHO FALSARIO</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body class="page-resume">
   <header class="site-header">
-    <a class="brand" href="index.html"><svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect rx="4" width="24" height="24" fill="currentColor" /><text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text></svg><span class="brand-text">JERICHO FALSARIO</span></a>
-    <input class="nav-toggle" id="nav-toggle-4" type="checkbox" />
-    <label class="nav-btn" for="nav-toggle-4" aria-hidden="true"><span></span></label>
+    <a class="brand" href="index.html">
+      <svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+        <rect rx="4" width="24" height="24" fill="currentColor" />
+        <text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text>
+      </svg>
+      <span class="brand-text" id="site-brand-name">JERICHO FALSARIO</span>
+    </a>
+
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle" aria-hidden="true">
+      <span></span>
+    </label>
+
     <nav class="nav">
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
       <a href="projects.html" class="nav-link">Projects</a>
       <a href="resume.html" class="nav-link active">Resume</a>
       <a href="contact.html" class="nav-link">Contact</a>
+      <a href="/admin" class="nav-link admin-nav-btn" target="_blank"><i class="fa-solid fa-lock"></i> Admin Panel</a>
     </nav>
   </header>
 
-  <main class="resume-main">
-    <div class="resume-header">
+  <main style="max-width: var(--max-width); margin: 36px auto; padding: 0 24px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px; flex-wrap:wrap; gap:16px;">
       <div>
-        <h1>JERICHO FALSARIO</h1>
-        <p class="muted">Full-stack & Cloud Engineer — Cloud Architecture · DevOps · Security</p>
+        <h1 class="section-title" style="margin:0;">Professional Resume</h1>
+        <p style="color:var(--muted); margin: 4px 0 0;" id="resume-subtitle">Information Technology Engineer</p>
       </div>
-      <div class="resume-actions">
-        <a class="btn btn-outline" href="assets/images/resume.pdf" download>Download PDF</a>
-        <a class="btn btn-primary" href="contact.html">Contact</a>
-      </div>
+      <a id="download-resume-btn" href="/api/experience/download-resume" class="btn btn-primary"><i class="fa-solid fa-download"></i> Download PDF Resume</a>
     </div>
 
-    <section class="resume-columns">
-      <div class="col-left">
-        <h3>Experience</h3>
-        <div class="resume-item">
-          <h4>Senior Cloud Engineer — Acme Corp</h4>
-          <time>2021 — Present</time>
-          <ul>
-            <li>Designed multi-tenant telemetry platform and implemented autoscaling ingestion pipelines.</li>
-            <li>Implemented cost controls and optimized workloads to save $250k/year.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <h4>Software Engineer — Startup Labs</h4>
-          <time>2018 — 2021</time>
-          <ul>
-            <li>Built backend services and CI/CD pipelines; delivered several high-impact releases.</li>
-          </ul>
-        </div>
+    <div class="card" style="padding: 32px; margin-bottom: 36px;">
+      <h2 style="margin-top:0; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px;"><i class="fa-solid fa-briefcase text-accent"></i> Work Experience</h2>
+      <div id="resume-work-list">
+        <!-- Loaded dynamically -->
       </div>
 
-      <aside class="col-right">
-        <h3>Education</h3>
-        <div class="resume-item">
-          <h4>B.S., Computer Science</h4>
-          <time>State University • 2014 — 2018</time>
-        </div>
-
-        <h3>Certifications</h3>
-        <ul class="cert-list">
-          <li>Google Cloud Professional Cloud Architect</li>
-          <li>Certified Kubernetes Administrator (CKA)</li>
-          <li>CompTIA Security+</li>
-        </ul>
-
-        <h3>Skills</h3>
-        <div class="skill-list">
-          <span>GCP</span><span>AWS</span><span>Terraform</span><span>Kubernetes</span><span>Go</span><span>Node.js</span><span>Prometheus</span>
-        </div>
-      </aside>
-    </section>
+      <h2 style="margin-top: 36px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px;"><i class="fa-solid fa-graduation-cap text-accent"></i> Education & Credentials</h2>
+      <div id="resume-edu-list">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
   </main>
 
- <footer class="site-footer">
-      <div class="footer-inner">
-        <div><strong>JERICHO FALSARIO</strong>
-          <div class="muted">Information Technology Engineer</div>
-        </div>
-        <div class="footer-links">
-          <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://ph.linkedin.com/in/jerichofalsari0" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="mailto:falsariojericho@gmail.com">falsariojericho@gmail.com</a>
-        </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong id="footer-name">JERICHO FALSARIO</strong>
+        <div class="muted">Information Technology Engineer</div>
       </div>
-      <div class="copyright">© <span id="year-2"></span> Jericho Falsario — Built with HTML & CSS</div>
-    </footer>
+      <div class="footer-links">
+        <a id="footer-github" href="#" target="_blank">GitHub</a>
+        <a id="footer-linkedin" href="#" target="_blank">LinkedIn</a>
+        <a id="footer-email" href="#">Email</a>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> Jericho Falsario — Full-Stack Portfolio</div>
+  </footer>
 
-<script>document.getElementById('year-4').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function loadResumePage() {
+      try {
+        const settings = await fetch('/api/settings').then(r => r.json());
+        if (settings.name) document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
+        if (settings.title) document.getElementById('resume-subtitle').textContent = settings.title;
+        if (settings.github) document.getElementById('footer-github').href = settings.github;
+        if (settings.linkedin) document.getElementById('footer-linkedin').href = settings.linkedin;
+        if (settings.email) document.getElementById('footer-email').href = 'mailto:' + settings.email;
+
+        const experiences = await fetch('/api/experience').then(r => r.json());
+        const workList = experiences.filter(e => e.type === 'work');
+        const eduList = experiences.filter(e => e.type !== 'work');
+
+        const workContainer = document.getElementById('resume-work-list');
+        if (workList.length) {
+          workContainer.innerHTML = workList.map(w => `
+            <div style="margin-bottom: 20px;">
+              <h3 style="margin:0 0 4px; font-size:1.1rem; color:var(--text);">${w.title}</h3>
+              <div style="color:var(--accent-2); font-weight:600; font-size:0.9rem;">${w.organization} ${w.location ? '• ' + w.location : ''}</div>
+              <div style="color:var(--muted); font-size:0.85rem; margin-bottom:8px;"><i class="fa-regular fa-calendar"></i> ${w.start_date} — ${w.end_date || 'Present'}</div>
+              <p style="margin:0; font-size:0.9rem; color:var(--muted);">${w.description || ''}</p>
+            </div>
+          `).join('');
+        }
+
+        const eduContainer = document.getElementById('resume-edu-list');
+        if (eduList.length) {
+          eduContainer.innerHTML = eduList.map(e => `
+            <div style="margin-bottom: 20px;">
+              <h3 style="margin:0 0 4px; font-size:1.1rem; color:var(--text);">${e.title}</h3>
+              <div style="color:var(--accent-2); font-weight:600; font-size:0.9rem;">${e.organization} ${e.location ? '• ' + e.location : ''}</div>
+              <div style="color:var(--muted); font-size:0.85rem; margin-bottom:8px;"><i class="fa-regular fa-calendar"></i> ${e.start_date} — ${e.end_date || 'Present'}</div>
+              <p style="margin:0; font-size:0.9rem; color:var(--muted);">${e.description || ''}</p>
+            </div>
+          `).join('');
+        }
+
+      } catch (err) {
+        console.error('Resume page load error:', err);
+      }
+    }
+
+    loadResumePage();
+  </script>
 </body>
 </html>

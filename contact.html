@@ -1,70 +1,229 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact — JERICHO FALSARIO</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; max-width: var(--max-width); margin: 36px auto; padding: 0 24px; }
+    .contact-info-card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; }
+    .info-item { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .info-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(123, 97, 255, 0.15); color: var(--accent-1); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+    .form-control { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem; box-sizing: border-box; }
+    .form-control:focus { outline: none; border-color: var(--accent-1); }
+    .alert-box { padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; font-size: 0.9rem; display: none; }
+    .alert-success { background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; }
+    .alert-error { background: rgba(244, 63, 94, 0.15); border: 1px solid #f43f5e; color: #f43f5e; }
+    @media(max-width: 768px) { .contact-wrapper { grid-template-columns: 1fr; } }
+  </style>
 </head>
+
 <body class="page-contact">
   <header class="site-header">
-    <a class="brand" href="index.html"><svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect rx="4" width="24" height="24" fill="currentColor" /><text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text></svg><span class="brand-text">JERICHO FALSARIO</span></a>
-    <input class="nav-toggle" id="nav-toggle-5" type="checkbox" />
-    <label class="nav-btn" for="nav-toggle-5" aria-hidden="true"><span></span></label>
+    <a class="brand" href="index.html">
+      <svg class="logo" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+        <rect rx="4" width="24" height="24" fill="currentColor" />
+        <text x="50%" y="57%" text-anchor="middle" fill="#fff" font-size="12" font-family="Inter, sans-serif">IT</text>
+      </svg>
+      <span class="brand-text" id="site-brand-name">JERICHO FALSARIO</span>
+    </a>
+
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" />
+    <label class="nav-btn" for="nav-toggle" aria-hidden="true">
+      <span></span>
+    </label>
+
     <nav class="nav">
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
       <a href="projects.html" class="nav-link">Projects</a>
       <a href="resume.html" class="nav-link">Resume</a>
       <a href="contact.html" class="nav-link active">Contact</a>
+      <a href="/admin" class="nav-link admin-nav-btn" target="_blank"><i class="fa-solid fa-lock"></i> Admin Panel</a>
     </nav>
   </header>
 
-  <main class="contact-main">
-    <section class="contact-card">
-      <h1>Let’s build something great.</h1>
-      <p class="muted">Open to full-time roles, contract work, and collaboration.</p>
+  <main class="contact-wrapper">
+    <div class="contact-info-card">
+      <h1 class="section-title" style="margin-top:0;">Get in Touch</h1>
+      <p style="color:var(--muted); margin-bottom: 24px;" id="contact-availability">Whether you have a system engineering project, job opportunity, or technical inquiry, feel free to drop a message.</p>
 
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>Contact</h3>
-          <p><strong>Email</strong><br><a href="mailto:you@example.com">you@example.com</a></p>
-          <p><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">linkedin.com/in/yourusername</a></p>
-          <p><strong>GitHub</strong><br><a href="https://github.com/yourusername" target="_blank" rel="noreferrer">github.com/yourusername</a></p>
-          <div class="muted">Prefer to keep some details private? Please include a short project description when you reach out.</div>
-        </div>
-
-        <div class="contact-form">
-          <!-- Uses mailto — causes email client to open on submit. Keep since no JS/backend. -->
-          <form action="mailto:you@example.com" method="post" enctype="text/plain">
-            <label for="name">Name</label>
-            <input id="name" name="Name" placeholder="JERICHO FALSARIO" required>
-            <label for="email">Email</label>
-            <input id="email" name="Email" placeholder="you@example.com" type="email" required>
-            <label for="message">Message</label>
-            <textarea id="message" name="Message" rows="6" placeholder="Short message & availability" required></textarea>
-            <button class="btn btn-primary" type="submit">Send Email</button>
-          </form>
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div>
+          <div style="font-size:0.8rem; color:var(--muted);">Email Address</div>
+          <a id="contact-email-link" href="#" style="color:var(--text); text-decoration:none; font-weight:600;">falsariojericho@gmail.com</a>
         </div>
       </div>
-    </section>
+
+      <div class="info-item" id="info-phone-wrapper" style="display:none;">
+        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+        <div>
+          <div style="font-size:0.8rem; color:var(--muted);">Phone Number</div>
+          <span id="contact-phone" style="font-weight:600;"></span>
+        </div>
+      </div>
+
+      <div class="info-item" id="info-location-wrapper" style="display:none;">
+        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div>
+          <div style="font-size:0.8rem; color:var(--muted);">Location</div>
+          <span id="contact-location" style="font-weight:600;"></span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+        <div>
+          <div style="font-size:0.8rem; color:var(--muted);">LinkedIn</div>
+          <a id="contact-linkedin-link" href="#" target="_blank" style="color:var(--text); text-decoration:none; font-weight:600;">Profile</a>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-brands fa-github"></i></div>
+        <div>
+          <div style="font-size:0.8rem; color:var(--muted);">GitHub</div>
+          <a id="contact-github-link" href="#" target="_blank" style="color:var(--text); text-decoration:none; font-weight:600;">Repository</a>
+        </div>
+      </div>
+
+      <div id="dynamic-custom-contacts"></div>
+    </div>
+
+    <div class="contact-info-card">
+      <h2 style="margin-top:0;"><i class="fa-solid fa-paper-plane text-accent"></i> Send Message</h2>
+      
+      <div id="contact-alert" class="alert-box"></div>
+
+      <form id="contact-public-form">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="contact-name" class="form-control" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label>Your Email *</label>
+          <input type="email" id="contact-email" class="form-control" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" id="contact-subject" class="form-control" placeholder="Project Inquiry / Job Opportunity">
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea id="contact-message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+          <span>Send Message</span> <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
   </main>
 
-<footer class="site-footer">
-      <div class="footer-inner">
-        <div><strong>JERICHO FALSARIO</strong>
-          <div class="muted">Information Technology Engineer</div>
-        </div>
-        <div class="footer-links">
-          <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://ph.linkedin.com/in/jerichofalsari0" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="mailto:falsariojericho@gmail.com">falsariojericho@gmail.com</a>
-        </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong id="footer-name">JERICHO FALSARIO</strong>
+        <div class="muted">Information Technology Engineer</div>
       </div>
-      <div class="copyright">© <span id="year-2"></span> Jericho Falsario — Built with HTML & CSS</div>
-    </footer>
+      <div class="footer-links" id="footer-social-links">
+        <a id="footer-github" href="#" target="_blank">GitHub</a>
+        <a id="footer-linkedin" href="#" target="_blank">LinkedIn</a>
+        <a id="footer-email" href="#">Email</a>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> Jericho Falsario — Full-Stack Portfolio</div>
+  </footer>
 
-<script>document.getElementById('year-5').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function loadContactPage() {
+      try {
+        const settings = await fetch('/api/settings').then(r => r.json());
+        if (settings.name) document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
+        if (settings.availability) document.getElementById('contact-availability').textContent = settings.availability;
+        
+        if (settings.email) {
+          document.getElementById('contact-email-link').textContent = settings.email;
+          document.getElementById('contact-email-link').href = 'mailto:' + settings.email;
+          document.getElementById('footer-email').href = 'mailto:' + settings.email;
+        }
+        if (settings.phone) {
+          document.getElementById('contact-phone').textContent = settings.phone;
+          document.getElementById('info-phone-wrapper').style.display = 'flex';
+        }
+        if (settings.location) {
+          document.getElementById('contact-location').textContent = settings.location;
+          document.getElementById('info-location-wrapper').style.display = 'flex';
+        }
+        if (settings.linkedin) {
+          document.getElementById('contact-linkedin-link').href = settings.linkedin;
+          document.getElementById('footer-linkedin').href = settings.linkedin;
+        }
+        if (settings.github) {
+          document.getElementById('contact-github-link').href = settings.github;
+          document.getElementById('footer-github').href = settings.github;
+        }
+
+        // Additional dynamic social links in footer
+        const footerLinks = document.getElementById('footer-social-links');
+        if (settings.twitter) {
+          footerLinks.innerHTML += `<a href="${settings.twitter}" target="_blank">Twitter/X</a>`;
+        }
+        if (settings.facebook) {
+          footerLinks.innerHTML += `<a href="${settings.facebook}" target="_blank">Facebook</a>`;
+        }
+
+      } catch (err) {
+        console.error('Contact page load error:', err);
+      }
+    }
+
+    document.getElementById('contact-public-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const alertBox = document.getElementById('contact-alert');
+      alertBox.style.display = 'none';
+
+      const payload = {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        subject: document.getElementById('contact-subject').value,
+        message: document.getElementById('contact-message').value
+      };
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          alertBox.className = 'alert-box alert-success';
+          alertBox.textContent = data.message || 'Thank you! Message sent successfully.';
+          alertBox.style.display = 'block';
+          document.getElementById('contact-public-form').reset();
+        } else {
+          alertBox.className = 'alert-box alert-error';
+          alertBox.textContent = data.error || 'Failed to send message.';
+          alertBox.style.display = 'block';
+        }
+      } catch (err) {
+        alertBox.className = 'alert-box alert-error';
+        alertBox.textContent = 'Network error while sending message.';
+        alertBox.style.display = 'block';
+      }
+    });
+
+    loadContactPage();
+  </script>
 </body>
 </html>

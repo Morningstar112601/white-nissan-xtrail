@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Control Panel — Jericho Falsario Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- LOGIN SECTION (Visible when not authenticated) -->
+  <div id="login-section" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="admin-brand-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h2>Admin Authentication</h2>
+        <p>Manage portfolio content & view messages</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username"><i class="fa-solid fa-user"></i> Username</label>
+          <input type="text" id="login-username" class="form-input" placeholder="admin" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="login-password"><i class="fa-solid fa-key"></i> Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          <span>Sign In to Dashboard</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+      <div class="login-footer">
+        <a href="/" target="_blank"><i class="fa-solid fa-globe"></i> View Public Portfolio</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN DASHBOARD (Visible when authenticated) -->
+  <div id="dashboard-section" class="admin-layout hidden">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-box">
+          <i class="fa-solid fa-code"></i>
+        </div>
+        <div class="user-info">
+          <span class="user-name" id="display-admin-name">Jericho Falsario</span>
+          <span class="user-role"><i class="fa-solid fa-circle text-success"></i> Administrator</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="overview">
+          <i class="fa-solid fa-chart-pie"></i> Overview
+        </button>
+        <button class="nav-item" data-tab="projects">
+          <i class="fa-solid fa-folder-open"></i> Projects
+        </button>
+        <button class="nav-item" data-tab="skills">
+          <i class="fa-solid fa-bolt"></i> Technical Skills
+        </button>
+        <button class="nav-item" data-tab="experience">
+          <i class="fa-solid fa-briefcase"></i> Experience & Resume
+        </button>
+        <button class="nav-item" data-tab="messages">
+          <i class="fa-solid fa-envelope"></i> Messages <span class="badge-count" id="unread-count">0</span>
+        </button>
+        <button class="nav-item" data-tab="settings">
+          <i class="fa-solid fa-sliders"></i> Site Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="/" target="_blank" class="btn btn-outline btn-sm btn-block">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Site
+        </a>
+        <button id="logout-btn" class="btn btn-danger-outline btn-sm btn-block mt-2">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <h1 class="topbar-title" id="page-title">Dashboard Overview</h1>
+        <div class="topbar-actions">
+          <button class="btn btn-primary btn-sm" id="quick-add-project-btn">
+            <i class="fa-solid fa-plus"></i> Add New Project
+          </button>
+        </div>
+      </header>
+
+      <div class="content-container">
+        
+        <!-- TAB 1: OVERVIEW -->
+        <section id="tab-overview" class="tab-pane active">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon icon-purple"><i class="fa-solid fa-folder-tree"></i></div>
+              <div class="stat-details">
+                <span class="stat-label">Total Projects</span>
+                <span class="stat-value" id="stat-projects">0</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon icon-cyan"><i class="fa-solid fa-code"></i></div>
+              <div class="stat-details">
+                <span class="stat-label">Skills Listed</span>
+                <span class="stat-value" id="stat-skills">0</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon icon-emerald"><i class="fa-solid fa-comments"></i></div>
+              <div class="stat-details">
+                <span class="stat-label">Inbox Messages</span>
+                <span class="stat-value" id="stat-messages">0</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon icon-amber"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="stat-details">
+                <span class="stat-label">Work Entries</span>
+                <span class="stat-value" id="stat-experiences">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="admin-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-star text-warning"></i> Featured Projects</h3>
+                <button class="btn btn-sm btn-outline" onclick="switchTab('projects')">View All</button>
+              </div>
+              <div class="card-body" id="overview-featured-projects">
+                <!-- Dynamic featured project items -->
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-envelope-open-text text-primary"></i> Recent Messages</h3>
+                <button class="btn btn-sm btn-outline" onclick="switchTab('messages')">View Inbox</button>
+              </div>
+              <div class="card-body" id="overview-recent-messages">
+                <!-- Dynamic recent messages -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: PROJECTS MANAGEMENT -->
+        <section id="tab-projects" class="tab-pane">
+          <div class="tab-header">
+            <div>
+              <h2>Projects Manager</h2>
+              <p>Add, edit, reorder, or delete portfolio projects & manage section maintenance.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openProjectModal()">
+              <i class="fa-solid fa-plus"></i> Add Project
+            </button>
+          </div>
+
+          <!-- Projects Page Maintenance & Customization Card -->
+          <div class="admin-card mb-4" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-wrench text-amber"></i> Projects Page Maintenance & Header Settings</h3>
+            </div>
+            <div class="card-body">
+              <form id="projects-page-settings-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Projects Section Title</label>
+                    <input type="text" id="setting-projects_page_title" data-key="projects_page_title" class="form-input setting-field" placeholder="All Projects">
+                  </div>
+                  <div class="form-group">
+                    <label>Projects Section Subtitle / Intro Description</label>
+                    <input type="text" id="setting-projects_page_subtitle" data-key="projects_page_subtitle" class="form-input setting-field" placeholder="A showcase of software systems, DevOps pipelines, automation toolkits...">
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group checkbox-group" style="padding-top: 24px;">
+                    <label style="font-weight: 700; color: var(--admin-accent-amber);">
+                      <input type="checkbox" id="setting-projects_maintenance_mode" data-key="projects_maintenance_mode">
+                      <i class="fa-solid fa-triangle-exclamation"></i> Enable Maintenance Mode for Projects Page
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label>Maintenance Banner Message</label>
+                    <input type="text" id="setting-projects_maintenance_message" data-key="projects_maintenance_message" class="form-input setting-field" placeholder="Projects page is currently under maintenance. Check back soon!">
+                  </div>
+                </div>
+
+                <div style="margin-top: 12px;">
+                  <button type="submit" class="btn btn-outline btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save Projects Maintenance Settings</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="projects-admin-grid" id="admin-projects-list">
+            <!-- Dynamic project cards -->
+          </div>
+        </section>
+
+        <!-- TAB 3: SKILLS MANAGEMENT -->
+        <section id="tab-skills" class="tab-pane">
+          <div class="tab-header">
+            <div>
+              <h2>Technical Skills & Competencies</h2>
+              <p>Manage skill categories, proficiency bars, and display priorities.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openSkillModal()">
+              <i class="fa-solid fa-plus"></i> Add Skill
+            </button>
+          </div>
+
+          <div class="skills-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Category</th>
+                  <th>Skills / Details</th>
+                  <th>Proficiency %</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-skills-list">
+                <!-- Dynamic skills table rows -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- TAB 4: EXPERIENCE & RESUME -->
+        <section id="tab-experience" class="tab-pane">
+          <div class="tab-header">
+            <div>
+              <h2>Experience, Education & Resume</h2>
+              <p>Manage career timeline and upload downloadable PDF resume.</p>
+            </div>
+            <div class="header-btns">
+              <button class="btn btn-outline" onclick="openResumeUploadModal()">
+                <i class="fa-solid fa-file-pdf"></i> Upload Resume PDF
+              </button>
+              <button class="btn btn-primary" onclick="openExperienceModal()">
+                <i class="fa-solid fa-plus"></i> Add Work / Education
+              </button>
+            </div>
+          </div>
+
+          <div class="experience-list" id="admin-experience-list">
+            <!-- Dynamic experience cards -->
+          </div>
+        </section>
+
+        <!-- TAB 5: MESSAGES INBOX -->
+        <section id="tab-messages" class="tab-pane">
+          <div class="tab-header">
+            <div>
+              <h2>Contact Form Messages</h2>
+              <p>Inquiries received from prospective employers and clients.</p>
+            </div>
+          </div>
+
+          <div class="messages-list" id="admin-messages-list">
+            <!-- Dynamic inbox items -->
+          </div>
+        </section>
+
+        <!-- TAB 6: SITE SETTINGS -->
+        <section id="tab-settings" class="tab-pane">
+          <div class="tab-header">
+            <div>
+              <h2>Site & Profile Settings</h2>
+              <p>Update headline text, social links, custom profile fields, and security password.</p>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <div class="admin-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-user-gear"></i> Hero & Personal Info</h3>
+                <button type="button" class="btn btn-sm btn-outline" onclick="promptAddCustomField()">
+                  <i class="fa-solid fa-plus"></i> Add Custom Field
+                </button>
+              </div>
+              <div class="card-body">
+                <form id="settings-profile-form">
+                  <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="setting-name" data-key="name" class="form-input setting-field" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Professional Title</label>
+                    <input type="text" id="setting-title" data-key="title" class="form-input setting-field" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Hero Headline</label>
+                    <input type="text" id="setting-hero_headline" data-key="hero_headline" class="form-input setting-field" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Hero Subtitle / Bio</label>
+                    <textarea id="setting-hero_subtitle" data-key="hero_subtitle" class="form-input setting-field" rows="3" required></textarea>
+                  </div>
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Badge 1</label>
+                      <input type="text" id="setting-badge_1" data-key="badge_1" class="form-input setting-field">
+                    </div>
+                    <div class="form-group">
+                      <label>Badge 2</label>
+                      <input type="text" id="setting-badge_2" data-key="badge_2" class="form-input setting-field">
+                    </div>
+                    <div class="form-group">
+                      <label>Badge 3</label>
+                      <input type="text" id="setting-badge_3" data-key="badge_3" class="form-input setting-field">
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Email Address</label>
+                      <input type="email" id="setting-email" data-key="email" class="form-input setting-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Phone Number</label>
+                      <input type="text" id="setting-phone" data-key="phone" class="form-input setting-field" placeholder="+63 912 345 6789">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Location / Address</label>
+                    <input type="text" id="setting-location" data-key="location" class="form-input setting-field" placeholder="Manila, Philippines">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Availability / Job Status</label>
+                    <input type="text" id="setting-availability" data-key="availability" class="form-input setting-field" placeholder="Available for Full-time & Freelance Projects">
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>LinkedIn URL</label>
+                      <input type="url" id="setting-linkedin" data-key="linkedin" class="form-input setting-field">
+                    </div>
+                    <div class="form-group">
+                      <label>GitHub Repository / Profile URL</label>
+                      <input type="url" id="setting-github" data-key="github" class="form-input setting-field">
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Twitter / X URL</label>
+                      <input type="url" id="setting-twitter" data-key="twitter" class="form-input setting-field" placeholder="https://x.com/yourhandle">
+                    </div>
+                    <div class="form-group">
+                      <label>Facebook URL</label>
+                      <input type="url" id="setting-facebook" data-key="facebook" class="form-input setting-field" placeholder="https://facebook.com/yourprofile">
+                    </div>
+                  </div>
+
+                  <!-- DYNAMIC CUSTOM FIELDS CONTAINER -->
+                  <div id="custom-fields-container" style="margin-top: 12px;"></div>
+
+                  <div style="margin-top: 20px; display: flex; gap: 12px; align-items: center;">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Profile Settings</button>
+                    <button type="button" class="btn btn-outline" onclick="promptAddCustomField()"><i class="fa-solid fa-plus"></i> Add Another Custom Field</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-shield-key"></i> Security & Password</h3>
+              </div>
+              <div class="card-body">
+                <form id="change-password-form">
+                  <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" id="current-password" class="form-input" required>
+                  </div>
+                  <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" id="new-password" class="form-input" minlength="6" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirm-password" class="form-input" minlength="6" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary"><i class="fa-solid fa-lock"></i> Update Password</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- PROJECT MODAL -->
+  <div id="project-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="project-modal-title"><i class="fa-solid fa-folder-plus"></i> Add New Project</h3>
+        <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      </div>
+      <form id="project-form">
+        <input type="hidden" id="project-id">
+        <div class="form-group">
+          <label>Project Title *</label>
+          <input type="text" id="project-title" class="form-input" placeholder="e.g. Real-time Monitoring Platform" required>
+        </div>
+        <div class="form-group">
+          <label>Short Description *</label>
+          <input type="text" id="project-description" class="form-input" placeholder="Brief summary for preview card" required>
+        </div>
+        <div class="form-group">
+          <label>Detailed Description</label>
+          <textarea id="project-detailed_desc" class="form-input" rows="4" placeholder="Full details, implementation breakdown, architecture..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tags (comma separated)</label>
+            <input type="text" id="project-tags" class="form-input" placeholder="GCP, Prometheus, Grafana">
+          </div>
+          <div class="form-group">
+            <label>Display Order</label>
+            <input type="number" id="project-display_order" class="form-input" value="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Live URL</label>
+            <input type="text" id="project-live_url" class="form-input" placeholder="https://demo.example.com">
+          </div>
+          <div class="form-group">
+            <label>GitHub URL</label>
+            <input type="text" id="project-github_url" class="form-input" placeholder="https://github.com/...">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Project Screenshots / Images (Upload Multiple Files or Enter Image URLs)</label>
+          <input type="file" id="project-image-file" class="form-input" accept="image/*" multiple>
+          <input type="text" id="project-image_urls" class="form-input mt-2" placeholder="Or paste multiple image URLs separated by commas (https://..., https://...)">
+        </div>
+        <div class="form-group checkbox-group">
+          <label><input type="checkbox" id="project-is_featured"> Highlight as Featured Project on Home Page</label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeProjectModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SKILL MODAL -->
+  <div id="skill-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="skill-modal-title"><i class="fa-solid fa-bolt"></i> Add Technical Skill</h3>
+        <button class="modal-close" onclick="closeSkillModal()">&times;</button>
+      </div>
+      <form id="skill-form">
+        <input type="hidden" id="skill-id">
+        <div class="form-group">
+          <label>Category Title *</label>
+          <input type="text" id="skill-category" class="form-input" placeholder="e.g. Programming & Web" required>
+        </div>
+        <div class="form-group">
+          <label>Skill Name & Details *</label>
+          <input type="text" id="skill-name" class="form-input" placeholder="e.g. HTML, CSS, JavaScript, PHP, C#, MERN" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Proficiency Percentage (0 - 100) *</label>
+            <input type="number" id="skill-percentage" class="form-input" min="0" max="100" value="85" required>
+          </div>
+          <div class="form-group">
+            <label>Display Order</label>
+            <input type="number" id="skill-display_order" class="form-input" value="0">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeSkillModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Skill</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE MODAL -->
+  <div id="experience-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="experience-modal-title"><i class="fa-solid fa-briefcase"></i> Add Experience / Education</h3>
+        <button class="modal-close" onclick="closeExperienceModal()">&times;</button>
+      </div>
+      <form id="experience-form">
+        <input type="hidden" id="experience-id">
+        <div class="form-group">
+          <label>Entry Type *</label>
+          <select id="experience-type" class="form-input">
+            <option value="work">Work Experience</option>
+            <option value="education">Education</option>
+            <option value="certification">Certification</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Job Title / Degree / Certificate *</label>
+          <input type="text" id="experience-title" class="form-input" placeholder="e.g. Senior System Administrator" required>
+        </div>
+        <div class="form-group">
+          <label>Organization / Company / School *</label>
+          <input type="text" id="experience-organization" class="form-input" placeholder="e.g. Enterprise Solutions Corp" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="experience-location" class="form-input" placeholder="e.g. Manila, Philippines">
+          </div>
+          <div class="form-group">
+            <label>Display Order</label>
+            <input type="number" id="experience-display_order" class="form-input" value="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="text" id="experience-start_date" class="form-input" placeholder="e.g. 2021-01">
+          </div>
+          <div class="form-group">
+            <label>End Date</label>
+            <input type="text" id="experience-end_date" class="form-input" placeholder="e.g. Present">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description & Key Responsibilities</label>
+          <textarea id="experience-description" class="form-input" rows="3" placeholder="Key duties, tools used, achievements..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeExperienceModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Experience</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- RESUME UPLOAD MODAL -->
+  <div id="resume-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-file-pdf text-danger"></i> Upload Downloadable Resume PDF</h3>
+        <button class="modal-close" onclick="closeResumeModal()">&times;</button>
+      </div>
+      <form id="resume-upload-form">
+        <div class="form-group">
+          <label>Select Resume File (.pdf format)</label>
+          <input type="file" id="resume-file-input" class="form-input" accept=".pdf,application/pdf" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeResumeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Upload Resume</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CUSTOM FIELD MODAL -->
+  <div id="custom-field-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-sliders text-accent"></i> Add Custom Profile Setting Field</h3>
+        <button class="modal-close" onclick="closeCustomFieldModal()">&times;</button>
+      </div>
+      <form id="custom-field-form">
+        <div class="form-group">
+          <label>Field Display Name * (e.g. "WhatsApp Number", "Discord Tag")</label>
+          <input type="text" id="custom-field-name" class="form-input" placeholder="e.g. WhatsApp" required>
+        </div>
+        <div class="form-group">
+          <label>Initial Value</label>
+          <input type="text" id="custom-field-val" class="form-input" placeholder="e.g. +63 900 000 0000">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeCustomFieldModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Field to Settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/admin/js/admin.js"></script>
+</body>
+</html>
