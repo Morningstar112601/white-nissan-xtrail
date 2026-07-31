@@ -135,11 +135,31 @@ function setupEventListeners() {
     });
   }
 
+  // Mobile Sidebar Toggle
+  const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebarOverlay = document.getElementById('sidebar-overlay');
+  const adminSidebar = document.getElementById('admin-sidebar');
+
+  function closeMobileSidebar() {
+    if (adminSidebar) adminSidebar.classList.remove('active');
+    if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+  }
+
+  if (sidebarToggle && adminSidebar && sidebarOverlay) {
+    sidebarToggle.addEventListener('click', () => {
+      adminSidebar.classList.toggle('active');
+      sidebarOverlay.classList.toggle('active');
+    });
+
+    sidebarOverlay.addEventListener('click', closeMobileSidebar);
+  }
+
   // Tab Navigation
   document.querySelectorAll('.sidebar-nav .nav-item').forEach(button => {
     button.addEventListener('click', () => {
       const tabName = button.getAttribute('data-tab');
       switchTab(tabName);
+      closeMobileSidebar();
     });
   });
 

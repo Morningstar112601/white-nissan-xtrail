@@ -57,8 +57,11 @@
 
   <!-- MAIN ADMIN DASHBOARD (Visible when authenticated) -->
   <div id="dashboard-section" class="admin-layout hidden">
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
     <!-- Sidebar Navigation -->
-    <aside class="admin-sidebar">
+    <aside class="admin-sidebar" id="admin-sidebar">
       <div class="sidebar-header">
         <div class="logo-box">
           <i class="fa-solid fa-code"></i>
@@ -103,7 +106,12 @@
     <!-- Main Content Area -->
     <main class="admin-main">
       <header class="admin-topbar">
-        <h1 class="topbar-title" id="page-title">Dashboard Overview</h1>
+        <div class="topbar-left">
+          <button class="btn-icon mobile-toggle-btn" id="sidebar-toggle" aria-label="Toggle Navigation Menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <h1 class="topbar-title" id="page-title">Dashboard Overview</h1>
+        </div>
         <div class="topbar-actions">
           <button class="btn btn-primary btn-sm" id="quick-add-project-btn">
             <i class="fa-solid fa-plus"></i> Add New Project
