@@ -641,7 +641,13 @@ body.admin-body {
     left: 0;
   }
   .admin-main {
-    padding: 84px 18px 24px 18px;
+    padding: 76px 18px 24px 18px;
+  }
+  .tab-header h2 {
+    display: none;
+  }
+  .tab-header {
+    margin-bottom: 18px;
   }
 }
 
@@ -654,7 +660,7 @@ body.admin-body {
     font-size: 0.85rem;
   }
   .admin-main {
-    padding: 80px 12px 20px 12px;
+    padding: 74px 12px 20px 12px;
   }
 }
 
