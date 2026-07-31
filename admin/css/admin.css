@@ -76,6 +76,35 @@ body.admin-body {
   text-align: center;
   margin-top: 20px;
 }
+.btn-pwa-install {
+  background: linear-gradient(135deg, rgba(123, 97, 255, 0.25), rgba(0, 212, 255, 0.25));
+  border: 1px solid var(--admin-accent-purple);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(123, 97, 255, 0.2);
+}
+.btn-pwa-install:hover {
+  background: linear-gradient(135deg, var(--admin-accent-purple), var(--admin-accent-cyan));
+  box-shadow: 0 6px 20px rgba(123, 97, 255, 0.4);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+.btn-pwa-install i {
+  font-size: 1.1rem;
+}
+.login-public-link {
+  margin-top: 16px;
+}
 .login-footer a {
   color: var(--admin-accent-cyan);
   text-decoration: none;

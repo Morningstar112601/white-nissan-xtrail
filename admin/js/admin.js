@@ -1,6 +1,25 @@
-// admin.js — Admin Control Panel Application Script
-
 let token = localStorage.getItem('admin_token') || '';
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('pwa-install-btn');
+  if (btn) {
+    btn.style.display = 'flex';
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  const btn = document.getElementById('pwa-install-btn');
+  if (btn) {
+    btn.style.display = 'none';
+  }
+  if (typeof showToast === 'function') {
+    showToast('Admin App installed successfully!', 'success');
+  }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   if ('serviceWorker' in navigator) {
@@ -89,6 +108,32 @@ function setupEventListeners() {
     showToast('Logged out', 'success');
     showLogin();
   });
+
+  // PWA Install Button logic
+  const pwaInstallBtn = document.getElementById('pwa-install-btn');
+  if (pwaInstallBtn) {
+    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+      pwaInstallBtn.style.display = 'none';
+    }
+
+    pwaInstallBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          showToast('Installing Admin App...', 'info');
+        }
+        deferredPrompt = null;
+        pwaInstallBtn.style.display = 'none';
+      } else {
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+          showToast('Admin App is already installed and running!', 'info');
+        } else {
+          showToast('To install: Open browser menu (⋮ or Share) and select "Install" or "Add to Home Screen".', 'info');
+        }
+      }
+    });
+  }
 
   // Tab Navigation
   document.querySelectorAll('.sidebar-nav .nav-item').forEach(button => {
