@@ -157,8 +157,28 @@ body{
 .profile-card h3{margin:0 0 6px}
 .profile-card .small{font-size:0.9rem;color:var(--muted)}
 .contact-mini{margin-top:12px;text-align:left;display:grid;gap:10px}
-.contact-mini strong{display:block}
-.contact-mini a{color:var(--accent-2);text-decoration:none}
+.footer-links { display: flex; gap: 14px; align-items: center; }
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  font-size: 1.25rem;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.footer-links a:hover {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 24px rgba(123, 97, 255, 0.45);
+}
 .profile-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;justify-content:center}
 .badge{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:6px 10px;border-radius:999px;font-weight:600;font-size:0.85rem;color:var(--muted);border:1px solid var(--border)}
 
