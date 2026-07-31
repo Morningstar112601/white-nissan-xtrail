@@ -740,7 +740,7 @@ async function deleteMessage(id) {
 }
 
 // SITE SETTINGS & DYNAMIC CUSTOM FIELDS
-const standardSettingKeys = ['name', 'title', 'hero_headline', 'hero_subtitle', 'badge_1', 'badge_2', 'badge_3', 'email', 'phone', 'location', 'availability', 'linkedin', 'github', 'twitter', 'facebook', 'projects_page_title', 'projects_page_subtitle', 'projects_maintenance_mode', 'projects_maintenance_message'];
+const standardSettingKeys = ['name', 'title', 'hero_headline', 'hero_subtitle', 'badge_1', 'badge_2', 'badge_3', 'photo_url', 'email', 'phone', 'location', 'availability', 'linkedin', 'github', 'twitter', 'facebook', 'projects_page_title', 'projects_page_subtitle', 'projects_maintenance_mode', 'projects_maintenance_message'];
 
 async function loadSettings() {
   try {

@@ -199,9 +199,83 @@
     /* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
+      display: flex; align-items: center; gap: 48px;
       padding: 96px clamp(20px, 6vw, 80px) 64px;
       max-width: var(--max-w); margin: 0 auto;
+    }
+    .hero-content { flex: 1; min-width: 0; }
+
+    /* ── Hero Photo (Cyber ID Card) ───────────────── */
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      width: clamp(220px, 28vw, 340px);
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .hero-photo-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--bg-2);
+      box-shadow: 0 0 40px rgba(0,212,255,0.12), inset 0 0 40px rgba(0,0,0,0.4);
+    }
+    .hero-photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block; filter: saturate(0.9);
+      transition: filter 0.4s;
+    }
+    .hero-photo-frame:hover img { filter: saturate(1.1); }
+    /* Scan line animation over photo */
+    .hero-photo-frame::after {
+      content: '';
+      position: absolute; top: -100%; left: 0; right: 0; height: 40%;
+      background: linear-gradient(180deg, transparent, rgba(0,212,255,0.06), transparent);
+      animation: photoScan 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes photoScan { 0% { top: -40%; } 100% { top: 140%; } }
+    /* Corner brackets */
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 2;
+      background:
+        linear-gradient(to right, var(--cyan) 2px, transparent 2px) 0 0 / 14px 14px no-repeat,
+        linear-gradient(to bottom, var(--cyan) 2px, transparent 2px) 0 0 / 14px 14px no-repeat,
+        linear-gradient(to left, var(--cyan) 2px, transparent 2px) 100% 0 / 14px 14px no-repeat,
+        linear-gradient(to bottom, var(--cyan) 2px, transparent 2px) 100% 0 / 14px 14px no-repeat,
+        linear-gradient(to right, var(--cyan) 2px, transparent 2px) 0 100% / 14px 14px no-repeat,
+        linear-gradient(to top, var(--cyan) 2px, transparent 2px) 0 100% / 14px 14px no-repeat,
+        linear-gradient(to left, var(--cyan) 2px, transparent 2px) 100% 100% / 14px 14px no-repeat,
+        linear-gradient(to top, var(--cyan) 2px, transparent 2px) 100% 100% / 14px 14px no-repeat;
+      pointer-events: none;
+    }
+    .hero-photo-id {
+      width: 100%; font-family: var(--font-mono); font-size: 0.65rem;
+      color: var(--text-muted); letter-spacing: 0.1em;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .photo-id-row {
+      background: var(--bg-2); border: 1px solid var(--border-dim);
+      border-radius: 4px; padding: 6px 10px;
+    }
+    .photo-id-row span:first-child { display: block; color: var(--cyan); font-size: 0.58rem; margin-bottom: 2px; }
+    .photo-id-row span:last-child { color: var(--text); font-size: 0.72rem; font-weight: 500; }
+    /* Hide photo wrap when empty */
+    .hero-photo-wrap.hidden { display: none; }
+
+    @media (max-width: 860px) {
+      .hero {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        padding-top: 84px;
+      }
+      .hero-photo-wrap {
+        width: clamp(140px, 40vw, 200px);
+        align-self: center;
+      }
     }
     .hero-sys-label {
       font-family: var(--font-mono); font-size: 0.68rem;
@@ -495,27 +569,55 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-sys-label">SYS_VER: 2.4.1 &nbsp;|&nbsp; UPTIME: STABLE &nbsp;|&nbsp; SEC: ENCRYPTED</div>
-      <h1 class="hero-name" id="hero-name">
-        JERICHO <span class="accent">FALSARIO</span>
-      </h1>
-      <div class="hero-type-line">
-        <span class="type-prompt">&gt;&nbsp;</span>
-        <span id="typed-text"></span>
-        <span class="type-cursor-blink"></span>
+      <!-- Left: text content -->
+      <div class="hero-content">
+        <div class="hero-sys-label">SYS_VER: 2.4.1 &nbsp;|&nbsp; UPTIME: STABLE &nbsp;|&nbsp; SEC: ENCRYPTED</div>
+        <h1 class="hero-name" id="hero-name">
+          JERICHO <span class="accent">FALSARIO</span>
+        </h1>
+        <div class="hero-type-line">
+          <span class="type-prompt">&gt;&nbsp;</span>
+          <span id="typed-text"></span>
+          <span class="type-cursor-blink"></span>
+        </div>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="projects.html">
+            <i class="fa-solid fa-diagram-project"></i> VIEW PROJECTS
+          </a>
+          <a class="btn btn-outline" href="/api/experience/download-resume" id="download-resume-btn">
+            <i class="fa-solid fa-download"></i> DOWNLOAD RESUME
+          </a>
+        </div>
+        <div class="hero-badges" id="hero-badges">
+          <span class="badge">5+ YEARS EXPERIENCE</span>
+          <span class="badge">GOOGLE CLOUD CERTIFIED</span>
+          <span class="badge">FULL-STACK ENGINEER</span>
+        </div>
       </div>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="projects.html">
-          <i class="fa-solid fa-diagram-project"></i> VIEW PROJECTS
-        </a>
-        <a class="btn btn-outline" href="/api/experience/download-resume" id="download-resume-btn">
-          <i class="fa-solid fa-download"></i> DOWNLOAD RESUME
-        </a>
-      </div>
-      <div class="hero-badges" id="hero-badges">
-        <span class="badge">5+ YEARS EXPERIENCE</span>
-        <span class="badge">GOOGLE CLOUD CERTIFIED</span>
-        <span class="badge">FULL-STACK ENGINEER</span>
+
+      <!-- Right: Cyber ID card photo -->
+      <div class="hero-photo-wrap hidden" id="hero-photo-wrap">
+        <div class="hero-photo-frame">
+          <img id="hero-photo-img" src="" alt="Profile photo" loading="lazy" />
+        </div>
+        <div class="hero-photo-id">
+          <div class="photo-id-row">
+            <span>CLEARANCE</span>
+            <span>LEVEL 5</span>
+          </div>
+          <div class="photo-id-row">
+            <span>STATUS</span>
+            <span style="color:var(--green)">ACTIVE</span>
+          </div>
+          <div class="photo-id-row">
+            <span>ROLE</span>
+            <span id="photo-id-role">I.T. ENG.</span>
+          </div>
+          <div class="photo-id-row">
+            <span>BASE</span>
+            <span>PHL</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -801,11 +903,24 @@
         const first = parts.slice(0, -1).join(' ');
         const last  = parts[parts.length - 1];
         document.getElementById('hero-name').innerHTML = `${first} <span class="accent">${last}</span>`;
-        if (settings.title)      document.getElementById('footer-title').textContent = settings.title;
+        if (settings.title) {
+          document.getElementById('footer-title').textContent = settings.title;
+          const roleEl = document.getElementById('photo-id-role');
+          if (roleEl) roleEl.textContent = (settings.title || '').split(' ').slice(0,2).join(' ').toUpperCase() || 'I.T. ENG.';
+        }
         if (settings.github)     document.getElementById('footer-github').href = settings.github;
         if (settings.linkedin)   document.getElementById('footer-linkedin').href = settings.linkedin;
         if (settings.email)      document.getElementById('footer-email').href = 'mailto:' + settings.email;
         if (settings.resume_url) document.getElementById('download-resume-btn').href = settings.resume_url;
+
+        /* ── Profile photo ── */
+        if (settings.photo_url) {
+          const photoImg  = document.getElementById('hero-photo-img');
+          const photoWrap = document.getElementById('hero-photo-wrap');
+          photoImg.src = settings.photo_url;
+          photoImg.onerror = () => photoWrap.classList.add('hidden');
+          photoWrap.classList.remove('hidden');
+        }
 
         const badgeList = [settings.badge_1, settings.badge_2, settings.badge_3].filter(Boolean);
         if (badgeList.length) {
