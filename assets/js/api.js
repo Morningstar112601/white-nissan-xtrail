@@ -1,17 +1,31 @@
-// api.js — Shared API fetcher with GitHub Pages static fallback
+// api.js — Shared API fetcher with Live Cloud Backend & GitHub Pages support
+
+// Live Render Backend URL (Will be updated with your Render Web Service URL)
+const LIVE_BACKEND_URL = window.location.hostname.includes('github.io')
+  ? 'https://white-nissan-xtrail-backend.onrender.com'
+  : '';
+
+function getApiUrl(endpoint) {
+  const path = endpoint.startsWith('/') ? endpoint : '/' + endpoint;
+  if (LIVE_BACKEND_URL) {
+    return `${LIVE_BACKEND_URL}/api${path}`;
+  }
+  return `/api${path}`;
+}
 
 async function fetchApiData(endpoint) {
-  // 1. Try live Node Express API first
+  // 1. Try live Node Express API first (Localhost or Render Cloud Server)
   try {
-    const res = await fetch('/api/' + endpoint);
+    const url = getApiUrl(endpoint);
+    const res = await fetch(url);
     if (res.ok) {
       return await res.json();
     }
   } catch (err) {
-    // API endpoint unreachable (e.g. static hosting on GitHub Pages)
+    console.warn(`Live API call to ${endpoint} unreachable, falling back to static cache.`);
   }
 
-  // 2. Fallback to portfolio_data.json for GitHub Pages static hosting
+  // 2. Fallback to portfolio_data.json if Cloud API is spinning up
   try {
     const dbRes = await fetch('portfolio_data.json');
     if (dbRes.ok) {

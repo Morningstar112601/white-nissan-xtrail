@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: white-nissan-xtrail-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: jericho_portfolio_secret_key_2026_render
