@@ -593,11 +593,12 @@ body.admin-body {
     left: 0;
     right: 0;
     width: 100%;
+    height: 60px;
     z-index: 990;
     background: rgba(11, 17, 32, 0.95);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    padding: 12px 18px;
+    padding: 0 16px;
     margin: 0;
     border-bottom: 1px solid var(--admin-border);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
@@ -606,13 +607,21 @@ body.admin-body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 10px;
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
   }
   .topbar-title {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0;
   }
   .mobile-toggle-btn {
     display: flex;
@@ -632,15 +641,24 @@ body.admin-body {
     left: 0;
   }
   .admin-main {
-    padding: 82px 18px 24px 18px;
+    padding: 84px 18px 24px 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .topbar-btn-text {
+    display: none;
+  }
+  .topbar-actions .btn {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  .admin-main {
+    padding: 80px 12px 20px 12px;
   }
 }
 
 @media (max-width: 768px) {
-  .topbar-actions .btn {
-    padding: 8px 12px;
-    font-size: 0.8rem;
-  }
   .tab-header {
     flex-direction: column;
     align-items: flex-start;
