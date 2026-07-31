@@ -2,7 +2,7 @@
 
 // Live Render Backend URL (Will be updated with your Render Web Service URL)
 const LIVE_BACKEND_URL = window.location.hostname.includes('github.io')
-  ? 'https://jerichofalsario-portfolio.onrender.com'
+  ? 'https://jerichofalsario.onrender.com'
   : '';
 
 function getApiUrl(endpoint) {
