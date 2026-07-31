@@ -478,7 +478,7 @@ body.admin-body {
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
   padding: 18px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   transition: all 0.2s;
 }
 .message-item.unread {
@@ -488,14 +488,70 @@ body.admin-body {
 .message-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
 }
-.message-sender { font-weight: 700; font-size: 1rem; }
-.message-email { color: var(--admin-accent-cyan); font-size: 0.85rem; margin-left: 8px; }
-.message-date { color: var(--admin-text-muted); font-size: 0.8rem; }
-.message-subject { font-weight: 600; color: var(--admin-text-main); margin-bottom: 6px; }
-.message-content { color: var(--admin-text-muted); font-size: 0.9rem; line-height: 1.5; white-space: pre-line; }
+.message-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.message-sender {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--admin-text-main);
+  word-break: break-word;
+}
+.message-email {
+  color: var(--admin-accent-cyan);
+  font-size: 0.85rem;
+  text-decoration: none;
+  word-break: break-all;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.message-email:hover { text-decoration: underline; }
+.message-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.message-date {
+  color: var(--admin-text-muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.message-subject {
+  font-weight: 600;
+  color: var(--admin-text-main);
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+.message-content {
+  color: var(--admin-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .message-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .message-actions {
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
 
 /* Toast Notifications */
 #toast-container {

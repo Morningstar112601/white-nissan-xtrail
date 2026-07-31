@@ -687,14 +687,14 @@ async function loadMessages() {
     container.innerHTML = messages.map(m => `
       <div class="message-item ${m.is_read ? '' : 'unread'}">
         <div class="message-header">
-          <div>
+          <div class="message-meta">
             <span class="message-sender">${m.sender_name}</span>
             <a href="mailto:${m.sender_email}" class="message-email"><i class="fa-regular fa-envelope"></i> ${m.sender_email}</a>
           </div>
-          <div style="display:flex; align-items:center; gap:12px;">
+          <div class="message-actions">
             <span class="message-date">${new Date(m.created_at).toLocaleString()}</span>
-            ${!m.is_read ? `<button class="btn btn-outline btn-sm" onclick="markMessageRead(${m.id})">Mark Read</button>` : ''}
-            <button class="btn btn-danger-outline btn-sm" onclick="deleteMessage(${m.id})"><i class="fa-solid fa-trash"></i></button>
+            ${!m.is_read ? `<button class="btn btn-outline btn-sm btn-mark-read" onclick="markMessageRead(${m.id})"><i class="fa-solid fa-check"></i> <span>Mark Read</span></button>` : ''}
+            <button class="btn btn-danger-outline btn-sm btn-delete-msg" onclick="deleteMessage(${m.id})" aria-label="Delete message"><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
         <div class="message-subject">Subject: ${m.subject || 'General Inquiry'}</div>
