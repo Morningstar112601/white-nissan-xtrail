@@ -2,21 +2,26 @@
   "name": "Jericho Falsario Admin",
   "short_name": "Jericho Admin",
   "description": "Portfolio Admin Control Panel",
-  "start_url": "./index.html",
+  "id": "/admin/",
+  "start_url": "/admin/index.html",
+  "scope": "/admin/",
   "display": "standalone",
   "background_color": "#070b13",
   "theme_color": "#7b61ff",
   "orientation": "portrait-primary",
+  "categories": ["productivity", "utilities"],
   "icons": [
     {
-      "src": "https://img.icons8.com/color/192/spider-man-head.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "https://img.icons8.com/color/512/spider-man-head.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
