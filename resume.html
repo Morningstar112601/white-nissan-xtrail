@@ -72,19 +72,21 @@
     <div class="copyright">© <span id="year"></span> Jericho Falsario — Full-Stack Portfolio</div>
   </footer>
 
+  <script src="assets/js/api.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
     async function loadResumePage() {
       try {
-        const settings = await fetch('/api/settings').then(r => r.json());
+        const settings = await fetchApiData('settings');
         if (settings.name) document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
         if (settings.title) document.getElementById('resume-subtitle').textContent = settings.title;
         if (settings.github) document.getElementById('footer-github').href = settings.github;
         if (settings.linkedin) document.getElementById('footer-linkedin').href = settings.linkedin;
         if (settings.email) document.getElementById('footer-email').href = 'mailto:' + settings.email;
+        if (settings.resume_url) document.getElementById('download-resume-btn').href = settings.resume_url;
 
-        const experiences = await fetch('/api/experience').then(r => r.json());
+        const experiences = await fetchApiData('experience');
         const workList = experiences.filter(e => e.type === 'work');
         const eduList = experiences.filter(e => e.type !== 'work');
 

@@ -84,12 +84,13 @@
     <div class="copyright">© <span id="year"></span> Jericho Falsario — Full-Stack Portfolio</div>
   </footer>
 
+  <script src="assets/js/api.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
     async function loadAboutPage() {
       try {
-        const settings = await fetch('/api/settings').then(r => r.json());
+        const settings = await fetchApiData('settings');
         if (settings.name) document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
         if (settings.hero_subtitle) document.getElementById('about-bio').textContent = settings.hero_subtitle;
         if (settings.github) document.getElementById('footer-github').href = settings.github;
@@ -97,7 +98,7 @@
         if (settings.email) document.getElementById('footer-email').href = 'mailto:' + settings.email;
 
         // Load Experiences
-        const experiences = await fetch('/api/experience').then(r => r.json());
+        const experiences = await fetchApiData('experience');
         const timelineContainer = document.getElementById('experience-timeline');
         if (experiences.length) {
           timelineContainer.innerHTML = experiences.map(e => `
@@ -111,7 +112,7 @@
         }
 
         // Load Skills list preview
-        const skills = await fetch('/api/skills').then(r => r.json());
+        const skills = await fetchApiData('skills');
         const skillsContainer = document.getElementById('about-skills-list');
         if (skills.length) {
           skillsContainer.innerHTML = skills.map(s => `

@@ -79,7 +79,7 @@
     <section class="skills">
       <h2 class="section-title">Technical Skills</h2>
       <div class="skills-grid" id="public-skills-grid">
-        <!-- Loaded dynamically via API -->
+        <!-- Loaded dynamically via API / fallback -->
       </div>
     </section>
 
@@ -87,7 +87,7 @@
     <section class="featured">
       <h2 class="section-title">Featured Projects</h2>
       <div class="projects-preview" id="public-featured-projects">
-        <!-- Loaded dynamically via API -->
+        <!-- Loaded dynamically via API / fallback -->
       </div>
     </section>
 
@@ -108,13 +108,13 @@
     <div class="copyright">© <span id="year"></span> <span id="copyright-name">Jericho Falsario</span> — Full-Stack Portfolio</div>
   </footer>
 
+  <script src="assets/js/api.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
     async function loadPublicHomeData() {
       try {
-        // Load Settings
-        const settings = await fetch('/api/settings').then(r => r.json());
+        const settings = await fetchApiData('settings');
         if (settings.name) {
           document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
           document.getElementById('footer-name').textContent = settings.name.toUpperCase();
@@ -127,6 +127,7 @@
         if (settings.github) document.getElementById('footer-github').href = settings.github;
         if (settings.linkedin) document.getElementById('footer-linkedin').href = settings.linkedin;
         if (settings.email) document.getElementById('footer-email').href = 'mailto:' + settings.email;
+        if (settings.resume_url) document.getElementById('download-resume-btn').href = settings.resume_url;
 
         // Badges
         const badgesContainer = document.getElementById('hero-badges');
@@ -136,7 +137,7 @@
         }
 
         // Load Skills
-        const skills = await fetch('/api/skills').then(r => r.json());
+        const skills = await fetchApiData('skills');
         const skillsGrid = document.getElementById('public-skills-grid');
         if (skills.length) {
           skillsGrid.innerHTML = skills.map(s => `
@@ -153,7 +154,7 @@
         }
 
         // Load Featured Projects
-        const projects = await fetch('/api/projects').then(r => r.json());
+        const projects = await fetchApiData('projects');
         const featuredProjects = projects.filter(p => p.is_featured).slice(0, 3);
         const projectsPreview = document.getElementById('public-featured-projects');
         
@@ -176,7 +177,7 @@
         }
 
       } catch (err) {
-        console.error('Home dynamic load error:', err);
+        console.error('Home load error:', err);
       }
     }
 

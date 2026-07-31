@@ -357,6 +357,7 @@
     <div class="copyright">© <span id="year"></span> Jericho Falsario — Full-Stack Portfolio</div>
   </footer>
 
+  <script src="assets/js/api.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     let allProjects = [];
@@ -367,7 +368,7 @@
 
     async function loadProjectsPage() {
       try {
-        const settings = await fetch('/api/settings').then(r => r.json());
+        const settings = await fetchApiData('settings');
         if (settings.name) document.getElementById('site-brand-name').textContent = settings.name.toUpperCase();
         if (settings.github) document.getElementById('footer-github').href = settings.github;
         if (settings.linkedin) document.getElementById('footer-linkedin').href = settings.linkedin;
@@ -390,7 +391,7 @@
           }
         }
 
-        allProjects = await fetch('/api/projects').then(r => r.json());
+        allProjects = await fetchApiData('projects');
         
         // Build Filter tags
         const tagSet = new Set();
