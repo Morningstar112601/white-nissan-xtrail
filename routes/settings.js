@@ -1,30 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
 const { all, run } = require('../database/db');
 const { authenticateToken } = require('../middleware/auth');
 
-// ── Photo upload setup ────────────────────────────────
+// Multer storage for Profile Photo upload
 const uploadsDir = path.join(__dirname, '..', 'uploads');
-if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
-const photoStorage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadsDir),
-  filename: (req, file, cb) => {
-    cb(null, 'profile-' + Date.now() + path.extname(file.originalname).toLowerCase());
-  }
+  filename: (req, file, cb) => cb(null, 'profile-photo-' + Date.now() + path.extname(file.originalname))
 });
+
 const uploadPhoto = multer({
-  storage: photoStorage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB max
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
-    const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-    if (allowed.includes(file.mimetype)) {
+    if (file.mimetype.startsWith('image/')) {
       cb(null, true);
     } else {
-      cb(new Error('Only image files are allowed (JPG, PNG, WEBP, GIF).'), false);
+      cb(new Error('Only image files are allowed!'), false);
     }
   }
 });
@@ -40,6 +40,28 @@ router.get('/', async (req, res) => {
     res.json(settingsMap);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch site settings.' });
+  }
+});
+
+// POST /api/settings/upload-photo - Upload profile photo (Admin)
+router.post('/upload-photo', authenticateToken, uploadPhoto.single('photo'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No image file provided.' });
+    }
+
+    const photoUrl = '/uploads/' + req.file.filename;
+
+    // Save photo_url into settings table
+    await run(
+      'INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?',
+      ['photo_url', photoUrl, photoUrl]
+    );
+
+    res.json({ message: 'Profile photo uploaded successfully!', photoUrl });
+  } catch (error) {
+    console.error('Photo upload error:', error);
+    res.status(500).json({ error: error.message || 'Failed to upload profile photo.' });
   }
 });
 
@@ -60,24 +82,5 @@ router.put('/', authenticateToken, async (req, res) => {
   }
 });
 
-// POST /api/settings/upload-photo - Upload profile photo (Admin)
-router.post('/upload-photo', authenticateToken, uploadPhoto.single('photo'), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No image file provided.' });
-    }
-    const photoUrl = '/uploads/' + req.file.filename;
-    await run(
-      'INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?',
-      ['photo_url', photoUrl, photoUrl]
-    );
-    res.json({ message: 'Photo uploaded successfully!', photoUrl });
-  } catch (error) {
-    console.error('Photo upload error:', error);
-    res.status(500).json({ error: error.message || 'Failed to upload photo.' });
-  }
-});
-
 module.exports = router;
-
 

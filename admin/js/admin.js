@@ -759,6 +759,10 @@ async function loadSettings() {
       }
     });
 
+    // Update photo preview thumbnail
+    const photoUrlVal = settings.photo_url || '';
+    updatePhotoPreview(photoUrlVal);
+
     // Populate custom dynamic fields
     const customContainer = document.getElementById('custom-fields-container');
     if (customContainer) {
@@ -768,12 +772,55 @@ async function loadSettings() {
           renderCustomFieldInput(key, key.replace(/_/g, ' ').toUpperCase(), value);
         }
       }
-    // Update profile photo preview if present
-    if (settings.photo_url) {
-      previewPhotoFromUrl(settings.photo_url);
     }
   } catch (err) {
     showToast('Failed to load settings', 'error');
+  }
+}
+
+function updatePhotoPreview(url) {
+  const preview = document.getElementById('setting-photo-preview');
+  const placeholder = document.getElementById('setting-photo-placeholder');
+  if (!preview) return;
+  if (url && url.trim()) {
+    preview.src = url;
+    preview.style.display = 'block';
+    if (placeholder) placeholder.style.display = 'none';
+  } else {
+    preview.src = '';
+    preview.style.display = 'none';
+    if (placeholder) placeholder.style.display = 'block';
+  }
+}
+
+async function handlePhotoUpload(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const formData = new FormData();
+  formData.append('photo', file);
+
+  showToast('Uploading profile photo...', 'info');
+
+  try {
+    const res = await fetch('/api/settings/upload-photo', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+
+    const data = await res.json();
+    if (res.ok && data.photoUrl) {
+      document.getElementById('setting-photo_url').value = data.photoUrl;
+      updatePhotoPreview(data.photoUrl);
+      showToast('Profile photo uploaded successfully!', 'success');
+    } else {
+      showToast(data.error || 'Photo upload failed', 'error');
+    }
+  } catch (err) {
+    console.error('Photo upload error:', err);
+    showToast('Failed to upload photo', 'error');
   }
 }
 
@@ -902,70 +949,3 @@ function showToast(message, type = 'success') {
     setTimeout(() => toast.remove(), 300);
   }, 3500);
 }
-
-// Profile Photo Upload & Preview
-function previewPhotoFromUrl(url) {
-  const img = document.getElementById('photo-preview-img');
-  const placeholder = document.getElementById('photo-preview-placeholder');
-  if (!img || !placeholder) return;
-
-  if (url && url.trim()) {
-    img.src = url;
-    img.style.display = 'block';
-    placeholder.style.display = 'none';
-  } else {
-    img.style.display = 'none';
-    placeholder.style.display = 'flex';
-  }
-}
-
-async function handlePhotoUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-
-  const statusEl = document.getElementById('photo-upload-status');
-  if (statusEl) {
-    statusEl.style.display = 'block';
-    statusEl.style.color = 'var(--admin-accent-cyan)';
-    statusEl.textContent = 'Uploading image...';
-  }
-
-  const formData = new FormData();
-  formData.append('photo', file);
-
-  try {
-    const res = await fetch('/api/settings/upload-photo', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-      body: formData
-    });
-
-    const data = await res.json();
-    if (res.ok && data.photoUrl) {
-      const photoUrlInput = document.getElementById('setting-photo_url');
-      if (photoUrlInput) photoUrlInput.value = data.photoUrl;
-      previewPhotoFromUrl(data.photoUrl);
-
-      if (statusEl) {
-        statusEl.style.color = '#00ff88';
-        statusEl.textContent = 'Photo uploaded & saved!';
-      }
-      showToast('Profile photo uploaded!', 'success');
-    } else {
-      if (statusEl) {
-        statusEl.style.color = '#ef4444';
-        statusEl.textContent = data.error || 'Upload failed';
-      }
-      showToast(data.error || 'Photo upload failed', 'error');
-    }
-  } catch (err) {
-    if (statusEl) {
-      statusEl.style.color = '#ef4444';
-      statusEl.textContent = 'Network or server error during upload';
-    }
-    showToast('Error uploading photo', 'error');
-  }
-}
-
