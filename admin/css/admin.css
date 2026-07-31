@@ -587,8 +587,21 @@ body.admin-body {
     grid-template-columns: 1fr;
     position: relative;
   }
+  .admin-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 990;
+    background: rgba(11, 17, 32, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 14px 18px;
+    margin: -20px -18px 20px -18px;
+    border-bottom: 1px solid var(--admin-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
   .mobile-toggle-btn {
     display: flex;
+    flex-shrink: 0;
   }
   .admin-sidebar {
     position: fixed;
