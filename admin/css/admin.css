@@ -704,7 +704,7 @@ body.admin-body {
     grid-template-columns: 1fr;
   }
   .admin-main {
-    padding: 16px 12px;
+    padding: 75px 12px;
   }
   #toast-container {
     left: 12px;
