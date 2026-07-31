@@ -351,9 +351,63 @@
 
                   <div class="form-row">
                     <div class="form-group" style="flex:1">
-                      <label><i class="fa-solid fa-image"></i> Profile Photo URL</label>
-                      <input type="url" id="setting-photo_url" data-key="photo_url" class="form-input setting-field" placeholder="https://example.com/your-photo.jpg">
-                      <small style="color:var(--admin-text-muted); font-size:0.78rem;">Paste a direct image URL (LinkedIn photo, Google Drive, etc.)</small>
+                      <label><i class="fa-solid fa-image"></i> Profile Photo</label>
+                      <!-- Upload widget -->
+                      <div id="photo-upload-widget" style="
+                        border: 1px dashed rgba(255,255,255,0.12);
+                        border-radius: 8px;
+                        padding: 16px;
+                        background: rgba(255,255,255,0.02);
+                        display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;
+                      ">
+                        <!-- Preview -->
+                        <div style="flex-shrink:0;">
+                          <img id="photo-preview-img"
+                            src="" alt="Photo preview"
+                            style="width:80px;height:80px;object-fit:cover;border-radius:8px;
+                                   border:1px solid rgba(255,255,255,0.1);
+                                   display:none;background:#0a1020;"
+                          />
+                          <div id="photo-preview-placeholder"
+                            style="width:80px;height:80px;border-radius:8px;
+                                   border:1px dashed rgba(255,255,255,0.15);
+                                   background:#0a1020;display:flex;
+                                   align-items:center;justify-content:center;
+                                   color:rgba(255,255,255,0.2);font-size:1.5rem;">
+                            <i class="fa-solid fa-user"></i>
+                          </div>
+                        </div>
+                        <!-- Controls -->
+                        <div style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:10px;">
+                          <!-- File from gallery -->
+                          <label for="photo-file-input" style="
+                            display:inline-flex;align-items:center;gap:8px;
+                            background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);
+                            color:#00d4ff;border-radius:6px;padding:9px 16px;
+                            cursor:pointer;font-size:0.8rem;font-weight:500;
+                            transition:all 0.2s;width:fit-content;
+                          " onmouseover="this.style.background='rgba(0,212,255,0.18)'"
+                             onmouseout="this.style.background='rgba(0,212,255,0.1)'">
+                            <i class="fa-solid fa-upload"></i> Upload from Gallery
+                          </label>
+                          <input type="file" id="photo-file-input"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                            style="display:none;" onchange="handlePhotoUpload(this)">
+                          <div id="photo-upload-status" style="font-size:0.75rem;color:var(--admin-text-muted);display:none;"></div>
+                          <!-- URL fallback -->
+                          <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="flex:1;height:1px;background:rgba(255,255,255,0.07);"></div>
+                            <span style="font-size:0.7rem;color:var(--admin-text-muted);">or paste URL</span>
+                            <div style="flex:1;height:1px;background:rgba(255,255,255,0.07);"></div>
+                          </div>
+                          <input type="url" id="setting-photo_url" data-key="photo_url"
+                            class="form-input setting-field"
+                            placeholder="https://example.com/your-photo.jpg"
+                            oninput="previewPhotoFromUrl(this.value)"
+                            style="font-size:0.8rem;">
+                          <small style="color:var(--admin-text-muted);font-size:0.72rem;">JPG, PNG, WEBP, GIF · Max 5MB</small>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
